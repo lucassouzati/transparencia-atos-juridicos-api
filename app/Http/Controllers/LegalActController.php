@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LegalAct;
 use Illuminate\Http\Request;
+use App\Http\Resources\LegalActResource;
 
 class LegalActController extends Controller
 {
@@ -14,7 +15,7 @@ class LegalActController extends Controller
      */
     public function index()
     {
-        //
+        return LegalActResource::collection(LegalAct::all());
     }
 
     /**
@@ -35,7 +36,9 @@ class LegalActController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $legal_act = LegalAct::create($request->all());
+
+        return $legal_act;
     }
 
     /**

@@ -10,7 +10,7 @@ class LegalAct extends Model
 {
     use HasFactory, HasUuids;
 
-    private $fillable = [
+    protected $fillable = [
         'act_date',
         'title',
         'type',
