@@ -16,6 +16,7 @@ class LegalAct extends Model
         'type',
         'description',
         'file',
+        'published'
     ];
 
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\LegalAct;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\LegalActResource;
+use App\Http\Requests\LegalAct\LegalActRequest;
 
 class LegalActController extends Controller
 {
@@ -34,7 +36,7 @@ class LegalActController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LegalActRequest $request)
     {
         $legal_act = LegalAct::create($request->all());
 
@@ -70,7 +72,7 @@ class LegalActController extends Controller
      * @param  \App\Models\LegalAct  $legalAct
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LegalAct $legalAct)
+    public function update(LegalActRequest $request, LegalAct $legalAct)
     {
         //
     }
