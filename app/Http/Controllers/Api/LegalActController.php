@@ -39,8 +39,9 @@ class LegalActController extends Controller
      * @param  \App\Models\LegalAct  $legalAct
      * @return \Illuminate\Http\Response
      */
-    public function show(LegalAct $legalAct)
+    public function show($id)
     {
+        $legalAct = LegalAct::findOrFail($id);
         return new LegalActResource($legalAct);
     }
 
@@ -51,8 +52,9 @@ class LegalActController extends Controller
      * @param  \App\Models\LegalAct  $legalAct
      * @return \Illuminate\Http\Response
      */
-    public function update(LegalActRequest $request, LegalAct $legalAct)
+    public function update(LegalActRequest $request, $id)
     {
+        $legalAct = LegalAct::findOrFail($id);
         $legalAct->fill($request->validated())->save();
         return new LegalActResource($legalAct);
     }
@@ -63,8 +65,9 @@ class LegalActController extends Controller
      * @param  \App\Models\LegalAct  $legalAct
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LegalAct $legalAct)
+    public function destroy($id)
     {
+        $legalAct = LegalAct::findOrFail($id);
         $legalAct->delete();
         return response()->json(null, 204);
     }
