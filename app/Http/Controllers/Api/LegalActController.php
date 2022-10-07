@@ -21,16 +21,6 @@ class LegalActController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -51,18 +41,7 @@ class LegalActController extends Controller
      */
     public function show(LegalAct $legalAct)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\LegalAct  $legalAct
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LegalAct $legalAct)
-    {
-        //
+        return new LegalActResource($legalAct);
     }
 
     /**
@@ -74,7 +53,8 @@ class LegalActController extends Controller
      */
     public function update(LegalActRequest $request, LegalAct $legalAct)
     {
-        //
+        $legalAct->fill($request->validated())->save();
+        return new LegalActResource($legalAct);
     }
 
     /**
@@ -85,6 +65,7 @@ class LegalActController extends Controller
      */
     public function destroy(LegalAct $legalAct)
     {
-        //
+        $legalAct->delete();
+        return response()->json(null, 204);
     }
 }
