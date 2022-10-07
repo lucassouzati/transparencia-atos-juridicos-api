@@ -30,7 +30,7 @@ class LegalActController extends Controller
     {
         $legal_act = LegalAct::create($request->all());
 
-        return $legal_act;
+        return new LegalActResource($legal_act);
     }
 
     /**

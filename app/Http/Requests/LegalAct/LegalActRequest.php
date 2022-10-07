@@ -13,7 +13,7 @@ class LegalActRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,11 +24,11 @@ class LegalActRequest extends FormRequest
     public function rules()
     {
         return [
-            'act_date' => 'required',
+            'act_date' =>'required',
             'title' => 'required',
             'type'=>'required',
             'description' =>'required',
-            'file' => 'mimes:pdf',
         ];
     }
+
 }
