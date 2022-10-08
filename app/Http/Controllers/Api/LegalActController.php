@@ -15,9 +15,47 @@ class LegalActController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return LegalActResource::collection(LegalAct::all());
+        $filters = $request->all();
+        $legalActs = LegalAct::when(isset($filters["title"]), function ($query) use ($filters)
+            {
+                return $query->where("title", 'like', $filters['title']);
+            })
+            ->when(isset($filters["type"]), function ($query) use ($filters)
+            {
+                return $query->where("type", $filters['type']);
+            })
+            ->when(isset($filters["description"]), function ($query) use ($filters)
+            {
+                return $query->where("description", $filters['description']);
+            })
+            ->when(isset($filters['start_act_date']), function ($query) use ($filters){
+                if(isset($filters['end_act_date']))
+                    return $query->whereBetween('act_date', [$filters['start_act_date'], $filters['end_act_date']]);
+                else
+                    return $query->where('act_date','>=', $filters['start_act_date']);
+            })
+            ->when(isset($filters["order_by"]), function ($query) use ($filters)
+            {
+                return $query->orderBy($filters["order_by"]);
+            }, function ($query) {
+                return $query->orderBy("act_date");
+            })
+            ->when(isset($filters["order_by"]), function ($query) use ($filters)
+            {
+                return $query->orderBy($filters["order_by"]);
+            }, function ($query) {
+                return $query->orderBy("act_date");
+            })
+            ->when(isset($filters["paginate"]), function ($query) use ($filters)
+            {
+                return $query->paginate($filters["paginate"]);
+            }, function ($query) {
+                return $query->paginate(100);
+            });
+
+        return LegalActResource::collection($legalActs);
     }
 
     /**
@@ -28,9 +66,9 @@ class LegalActController extends Controller
      */
     public function store(LegalActRequest $request)
     {
-        $legal_act = LegalAct::create($request->all());
+        $legalAct = LegalAct::create($request->all());
 
-        return new LegalActResource($legal_act);
+        return new LegalActResource($legalAct);
     }
 
     /**

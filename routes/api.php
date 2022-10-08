@@ -21,3 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('legalacts', LegalActController::class);
+
+Route::get('/', function () {
+    return response()->json([
+        'message' => 'This is a simple example of item returned by your APIs. Everyone can see it.'
+    ]);
+});
