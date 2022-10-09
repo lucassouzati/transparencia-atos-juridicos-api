@@ -13,10 +13,14 @@ class LegalAct extends Model
     protected $fillable = [
         'act_date',
         'title',
-        'type',
+        'type_id',
         'description',
         'file',
         'published'
     ];
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }
