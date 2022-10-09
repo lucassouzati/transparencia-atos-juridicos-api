@@ -10,9 +10,9 @@ class ValidFieldsFromLegalAct implements InvokableRule
 {
     private LegalAct $legalAct;
 
-    public function __construct(LegalAct $legalAct)
+    public function __construct()
     {
-        $this->legalAct = $legalAct;
+        $this->legalAct = new LegalAct();
     }
     /**
      * Run the validation rule.

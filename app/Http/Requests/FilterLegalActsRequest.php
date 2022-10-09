@@ -26,7 +26,7 @@ class FilterLegalActsRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_by' => [new ValidFieldsFromLegalAct(new LegalAct())]
+            'order_by' => [new ValidFieldsFromLegalAct()]
         ];
     }
 
