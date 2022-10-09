@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\LegalAct;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\FilterLegalActsRequest;
 use App\Http\Resources\LegalActResource;
 use App\Http\Requests\LegalAct\LegalActRequest;
 
@@ -15,7 +15,7 @@ class LegalActController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(FilterLegalActsRequest $request)
     {
         $filters = $request->all();
         $legalActs = LegalAct::when(isset($filters["title"]), function ($query) use ($filters)
