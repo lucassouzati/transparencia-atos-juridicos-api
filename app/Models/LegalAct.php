@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\LegalActFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -21,6 +22,11 @@ class LegalAct extends Model
 
     public function type()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsphpTo(Type::class);
     }
+
+    protected static function newFactory()
+{
+    return LegalActFactory::new();
+}
 }
