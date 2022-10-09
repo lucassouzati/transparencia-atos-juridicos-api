@@ -22,9 +22,9 @@ class LegalActController extends Controller
             {
                 return $query->where("title", 'like', $filters['title']);
             })
-            ->when(isset($filters["type"]), function ($query) use ($filters)
+            ->when(isset($filters["type_id"]), function ($query) use ($filters)
             {
-                return $query->where("type", $filters['type']);
+                return $query->where("type_id", $filters['type_id']);
             })
             ->when(isset($filters["description"]), function ($query) use ($filters)
             {
@@ -107,6 +107,6 @@ class LegalActController extends Controller
     {
         $legalAct = LegalAct::findOrFail($id);
         $legalAct->delete();
-        return response()->json(null, 204);
+        return response()->json([null], 204);
     }
 }

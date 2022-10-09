@@ -26,7 +26,7 @@ class LegalActRequest extends FormRequest
         return [
             'act_date' =>'required',
             'title' => 'required',
-            'type'=>'required',
+            'type_id'=>'required',
             'description' =>'required',
         ];
     }
