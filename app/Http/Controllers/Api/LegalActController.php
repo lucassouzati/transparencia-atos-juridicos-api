@@ -18,6 +18,7 @@ class LegalActController extends Controller
     public function index(FilterLegalActsRequest $request)
     {
         $filters = $request->all();
+
         $legalActs = LegalAct::when(isset($filters["title"]), function ($query) use ($filters)
             {
                 return $query->where("title", 'like', $filters['title']);

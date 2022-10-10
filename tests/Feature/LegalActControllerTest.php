@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\LegalAct;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\LegalAct;
 
 class LegalActControllerTest extends TestCase
 {
@@ -19,10 +18,15 @@ class LegalActControllerTest extends TestCase
 
     public function test_updating_a_legal_act()
     {
-        $legalact = LegalAct::first();
+        $user = User::factory()->create();
+
+        $legalact = LegalAct::factory()
+                            ->create();
+
         $legalact->title = "teste 2";
 
-        $response = $this->patchJson('/api/legalacts/'. $legalact->id,
+        $response = $this->actingAs($user)
+            ->patchJson('/api/legalacts/'. $legalact->id,
             $legalact->toArray());
 
         $response->assertStatus(200);
@@ -30,9 +34,12 @@ class LegalActControllerTest extends TestCase
 
     public function test_deleting_a_legal_act()
     {
-        $legalact = LegalAct::first();
+        $user = User::factory()->create();
+        $legalact = LegalAct::factory()
+                            ->create();
 
-        $response = $this->deleteJson('/api/legalacts/'. $legalact->id,
+        $response = $this->actingAs($user)
+            ->deleteJson('/api/legalacts/'. $legalact->id,
             $legalact->toArray());
 
         $response->assertStatus(204);
