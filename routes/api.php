@@ -27,11 +27,11 @@ Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
 Route::apiResource('legalacts', LegalActController::class);
 
-Route::apiResource('type', TypeController::class)->only([
+Route::apiResource('types', TypeController::class)->only([
     'index', 'show'
 ]);
 
-Route::apiResource('type', TypeController::class)->only([
+Route::apiResource('types', TypeController::class)->only([
     'store', 'update'
 ])->middleware('auth:sanctum');;
 
