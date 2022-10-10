@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Type extends Model
 {
@@ -14,6 +15,17 @@ class Type extends Model
         'description',
         'active',
     ];
+
+    protected static function booted()
+    {
+            static::addGlobalScope('active', function (Builder $builder) {
+                    if (!auth('sanctum')->check())
+                    {
+                        $builder->where('active', true);
+                    }
+            });
+    }
+
 
     public function legalActs()
     {

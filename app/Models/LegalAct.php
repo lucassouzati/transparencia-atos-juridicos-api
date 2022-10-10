@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Database\Factories\LegalActFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class LegalAct extends Model
 {
@@ -20,13 +20,19 @@ class LegalAct extends Model
         'published'
     ];
 
-    public function type()
+    protected static function booted()
     {
-        return $this->belongsphpTo(Type::class);
+            static::addGlobalScope('published', function (Builder $builder) {
+                    if (!auth('sanctum')->check())
+                    {
+                        $builder->where('published', true);
+                    }
+            });
     }
 
-    protected static function newFactory()
-{
-    return LegalActFactory::new();
-}
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
 }
