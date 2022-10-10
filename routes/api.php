@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\LegalActController;
 
 
@@ -25,6 +26,14 @@ Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
 Route::apiResource('legalacts', LegalActController::class);
+
+Route::apiResource('type', TypeController::class)->only([
+    'index', 'show'
+]);
+
+Route::apiResource('type', TypeController::class)->only([
+    'store', 'update'
+])->middleware('auth:sanctum');;
 
 Route::get('/', function () {
     return response()->json([
