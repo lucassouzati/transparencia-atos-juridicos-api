@@ -25,15 +25,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
-Route::apiResource('legalacts', LegalActController::class);
 
-Route::apiResource('types', TypeController::class)->only([
+
+Route::apiResource('legalacts', LegalActController::class)->only([
     'index', 'show'
 ]);
 
-Route::apiResource('types', TypeController::class)->only([
-    'store', 'update'
-])->middleware('auth:sanctum');;
+Route::apiResource('legalacts', LegalActController::class)->only([
+    'index', 'show'
+]);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('legalacts', LegalActController::class)->only([
+        'store', 'update'
+    ]);
+    Route::apiResource('types', TypeController::class)->only([
+        'store', 'update'
+    ]);
+});
+
+
 
 Route::get('/', function () {
     return response()->json([

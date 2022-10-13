@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterLegalActsRequest;
 use App\Http\Resources\LegalActResource;
 use App\Http\Requests\LegalAct\LegalActRequest;
+use Illuminate\Http\Request;
 
 class LegalActController extends Controller
 {

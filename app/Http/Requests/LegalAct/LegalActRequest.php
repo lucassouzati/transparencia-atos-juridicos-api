@@ -28,6 +28,7 @@ class LegalActRequest extends FormRequest
             'title' => 'required',
             'type_id'=>'required',
             'description' =>'required',
+            'published' => 'required'
         ];
     }
 
