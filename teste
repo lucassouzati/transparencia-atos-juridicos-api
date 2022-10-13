@@ -1,0 +1,12 @@
+=> [34;4mApp\Models\User[39;24m {#4611
+     [34mid[39m: "[32m977de284-fb6d-457f-87fe-8ebc613be9a6[39m",
+     [34mname[39m: "[32mAdministrador[39m",
+     [34memail[39m: "[32madmin@admin.com[39m",
+     [34memail_verified_at[39m: [36mnull[39m,
+     #[33mpassword[39m: "[32mteste1234[39m",
+     #[33mremember_token[39m: [36mnull[39m,
+     [34mprofile[39m: "[32madmin[39m",
+     [34mcreated_at[39m: "[32m2022-10-13 13:54:30[39m",
+     [34mupdated_at[39m: "[32m2022-10-13 13:54:30[39m",
+   }
+

@@ -25,7 +25,10 @@ class LegalAct extends Model
             static::addGlobalScope('published', function (Builder $builder) {
                     if (!auth('sanctum')->check())
                     {
-                        $builder->where('published', true);
+                        if (!auth('sanctum')->user()->isAdmin)
+                        {
+                            $builder->where('published', true);
+                        }
                     }
             });
     }
