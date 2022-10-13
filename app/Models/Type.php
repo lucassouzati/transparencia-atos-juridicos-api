@@ -19,10 +19,15 @@ class Type extends Model
     protected static function booted()
     {
             static::addGlobalScope('active', function (Builder $builder) {
-                    if (!auth('sanctum')->check())
-                    {
-                        $builder->where('active', true);
-                    }
+                if (!auth('sanctum')->check())
+                {
+                    $builder->where('active', true);
+
+                }
+                else if (auth('sanctum')->user()->cannot('see_inactive_types'))
+                {
+                    $builder->where('active', true);
+                }
             });
     }
 

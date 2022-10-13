@@ -28,7 +28,7 @@ class LegalAct extends Model
                         $builder->where('published', true);
 
                     }
-                    else if (!auth('sanctum')->user()->can('see_published_legalacts'))
+                    else if (auth('sanctum')->user()->cannot('see_published_legalacts'))
                     {
                         $builder->where('published', true);
                     }

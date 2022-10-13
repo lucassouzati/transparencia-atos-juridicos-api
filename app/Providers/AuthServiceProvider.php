@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('see_published_legalacts', function (User $user) {
+        Gate::any(['see_published_legalacts', 'see_inactive_types'], function (User $user) {
             return $user->isAdmin;
         });
     }
