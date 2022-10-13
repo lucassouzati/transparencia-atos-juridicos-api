@@ -31,7 +31,7 @@ Route::apiResource('legalacts', LegalActController::class)->only([
     'index', 'show'
 ]);
 
-Route::apiResource('legalacts', LegalActController::class)->only([
+Route::apiResource('types', TypeController::class)->only([
     'index', 'show'
 ]);
 

@@ -26,7 +26,12 @@ class FilterLegalActsRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_by' => [new ValidFieldsFromLegalAct()]
+            'title' => 'string|nullable',
+            'description' => 'string|nullable',
+            'start_act_date' => 'date|nullable',
+            'end_act_date' => 'date|nullable',
+            'paginate' => 'integer|nullable',
+            'order_by' => ['nullable', new ValidFieldsFromLegalAct()]
         ];
     }
 
