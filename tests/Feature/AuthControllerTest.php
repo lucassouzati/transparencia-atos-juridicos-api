@@ -35,6 +35,17 @@ class AuthControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_user_cant_login_with_invalid_credentials()
+    {
+
+        $response = $this->postJson(route('users.login'),
+            ['email' => fake()->email(),
+            'password' => fake()->password()
+        ]);
+
+        $response->assertStatus(401);
+    }
+
     /**
      * @test
      * @dataProvider registerInvalidFields
