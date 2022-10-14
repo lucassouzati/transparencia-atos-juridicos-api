@@ -37,10 +37,10 @@ Route::apiResource('types', TypeController::class)->only([
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('legalacts', LegalActController::class)->only([
-        'store', 'update'
+        'store', 'update', 'destroy'
     ]);
     Route::apiResource('types', TypeController::class)->only([
-        'store', 'update'
+        'store', 'update', 'destroy'
     ]);
 });
 

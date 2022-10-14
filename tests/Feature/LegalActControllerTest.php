@@ -10,7 +10,9 @@ class LegalActControllerTest extends TestCase
 {
     public function test_storing_a_legal_act()
     {
-        $response = $this->postJson('/api/legalacts',
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)
+            ->postJson('/api/legalacts',
             LegalAct::factory()->create()->toArray());
 
         $response->assertStatus(201);
@@ -20,8 +22,7 @@ class LegalActControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $legalact = LegalAct::factory()
-                            ->create();
+        $legalact = LegalAct::inRandomOrder()->first();
 
         $legalact->title = "teste 2";
 
@@ -35,8 +36,7 @@ class LegalActControllerTest extends TestCase
     public function test_deleting_a_legal_act()
     {
         $user = User::factory()->create();
-        $legalact = LegalAct::factory()
-                            ->create();
+        $legalact = LegalAct::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/legalacts/'. $legalact->id,

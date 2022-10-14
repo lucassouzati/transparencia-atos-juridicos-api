@@ -23,7 +23,8 @@ class LegalActFactory extends Factory
             'title' => fake()->word(),
             'type_id' => fake()->randomDigitNot(0),
             'description' => fake()->sentence(),
-            'file' => fake()->word()
+            'file' => fake()->word(),
+            'published' => 1,
         ];
     }
 }
