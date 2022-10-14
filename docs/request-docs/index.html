@@ -804,6 +804,90 @@
                             </a>
                         </td>
                     </tr>
+                                        <tr v-if="!docs[16]['isHidden']">
+                        <td>
+                            <a href="#DELETE-api/legalacts/{legalact}" @click="highlightSidebar(16)" >
+                                <span class="
+                                    font-medium
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    px-2
+                                    py-1
+                                    text-xs
+                                    font-bold
+                                    leading-none
+                                    rounded
+                                    text--100 bg--500
+                                    text- bg--500
+                                    text--100 bg--500
+                                    text--100 bg--500
+                                    text-white bg-black
+                                    ">
+                                    DELETE
+                                </span>
+                                <span class="text-xs" v-bind:class="docs[16]['isActiveSidebar'] ? 'font-bold':''">
+                                    <span class="text-gray-800 pr-1 pl-1" v-if="docs[16]['responseOk'] === null">api/legalacts/{legalact}</span>
+                                    <span class="font-bold text-green-600 border rounded-full pr-1 pl-1 border-green-600" v-if="docs[16]['responseOk'] === true">
+                                        api/legalacts/{legalact} -
+                                        <span
+                                            class="inline-flex text-xs"
+                                            v-text="'Status:'+docs[16]['responseCode'] + ', Took:' + docs[16]['responseTime'] + 'ms'">
+                                        </span>
+                                    </span>
+                                    <span class="font-bold text-red-600 border rounded-full pr-1 pl-1 border-red-500" v-if="docs[16]['responseOk'] === false">
+                                        api/legalacts/{legalact} -
+                                        <span
+                                            class="inline-flex text-xs"
+                                            v-text="'Status:'+docs[16]['responseCode'] + ', Took:' + docs[16]['responseTime'] + 'ms'">
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                                        <tr v-if="!docs[17]['isHidden']">
+                        <td>
+                            <a href="#DELETE-api/types/{type}" @click="highlightSidebar(17)" >
+                                <span class="
+                                    font-medium
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    px-2
+                                    py-1
+                                    text-xs
+                                    font-bold
+                                    leading-none
+                                    rounded
+                                    text--100 bg--500
+                                    text- bg--500
+                                    text--100 bg--500
+                                    text--100 bg--500
+                                    text-white bg-black
+                                    ">
+                                    DELETE
+                                </span>
+                                <span class="text-xs" v-bind:class="docs[17]['isActiveSidebar'] ? 'font-bold':''">
+                                    <span class="text-gray-800 pr-1 pl-1" v-if="docs[17]['responseOk'] === null">api/types/{type}</span>
+                                    <span class="font-bold text-green-600 border rounded-full pr-1 pl-1 border-green-600" v-if="docs[17]['responseOk'] === true">
+                                        api/types/{type} -
+                                        <span
+                                            class="inline-flex text-xs"
+                                            v-text="'Status:'+docs[17]['responseCode'] + ', Took:' + docs[17]['responseTime'] + 'ms'">
+                                        </span>
+                                    </span>
+                                    <span class="font-bold text-red-600 border rounded-full pr-1 pl-1 border-red-500" v-if="docs[17]['responseOk'] === false">
+                                        api/types/{type} -
+                                        <span
+                                            class="inline-flex text-xs"
+                                            v-text="'Status:'+docs[17]['responseCode'] + ', Took:' + docs[17]['responseTime'] + 'ms'">
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
                                     </tbody>
             </table>
         </aside>
@@ -5477,6 +5561,500 @@
                     </div>
                   </div>
             </section>
+                        <section class="pt-5 pl-2 pr-2 pb-5 border mb-10 rounded bg-white shadow" v-if="!docs[16]['isHidden']">
+                <div class="font-sans" id="DELETE-api/legalacts/{legalact}">
+                <h1 class="text-sm break-normal text-black bg-indigo-50 break-normal font-sans pb-1 pt-1 text-black">
+                    <span class="w-20
+                        font-medium
+                        inline-flex
+                        items-center
+                        justify-center
+                        px-2
+                        py-1
+                        text-xs
+                        font-bold
+                        leading-none
+                        rounded
+                        text--100 bg--500
+                        text- bg--500
+                        text--100 bg--500
+                        text--100 bg--500
+                        text-white bg-black
+                        ">
+                        DELETE
+                    </span>
+                    <span class="">
+                        <a href="#api/legalacts/{legalact}">api/legalacts/{legalact}</a>
+                    </span>
+                </h1>
+                </div>
+                <hr class="border-b border-grey-light">
+
+                <table class="table-fixed text-sm mt-5">
+                    <tbody>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">HTTP Method</td>
+                            <td class="align-left pl-2 pr-2 font-bold break-all">DELETE</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">URL</td>
+                            <td class="align-left pl-2 pr-2 break-all">
+                                <a target="_blank" href="{{window.location.origin}}/api/legalacts/{legalact}">{{window.location.origin}}/api/legalacts/{legalact}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Controller</td>
+                            <td class="align-left pl-2 pr-2 break-all">App\Http\Controllers\Api\LegalActController</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Controller Method</td>
+                            <td class="align-left pl-2 pr-2 break-all">@destroy</td>
+                        </tr>
+                                                    <tr>
+                                <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Middleware 1</td>
+                                <td class="align-left pl-2 pr-2 break-all">api</td>
+                            </tr>
+                                                    <tr>
+                                <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Middleware 2</td>
+                                <td class="align-left pl-2 pr-2 break-all">auth:sanctum</td>
+                            </tr>
+                                            </tbody>
+                </table>
+                <div v-if="docs[16]['docBlock']" class="border-2 mr-4 mt-4 p-4 rounded text-sm">
+                    <h3 class="font-bold">LRD Docs</h3>
+                    <vue-markdown></vue-markdown>
+                </div>
+                <br>
+                                <button
+                    class="hover:bg-red-500 font-semibold hover:text-white mt-2 pl-5 pr-5 border-gray-700 hover:border-transparent shadow-inner border-2 rounded-full"
+                    v-if="!docs[16]['try']"
+                    v-on:click="docs[16]['try'] = !docs[16]['try'];docs[16]['cancel'] = !docs[16]['cancel']"
+                >
+                    Try
+                </button>
+
+                <button
+                    class="hover:bg-red-500 font-semibold hover:text-white mt-2 pl-5 pr-5 border-gray-700 hover:border-transparent shadow-inner border-2 rounded-full"
+                    v-if="!docs[16]['cancel']"
+                    v-on:click="docs[16]['cancel'] = !docs[16]['cancel'];docs[16]['try'] = !docs[16]['try'];"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    v-if="docs[16]['try']"
+                    @click="request(docs[16])"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 border-blue-800 border-2 shadow-inner mb-1 pl-5 pr-5 rounded-full"
+                >
+                    <svg
+                        v-if="docs[16]['loading']"
+                        class="animate-spin h-4 w-4 rounded-full bg-transparent border-2 border-transparent border-opacity-50 inline pr-2" style="border-right-color: white; border-top-color: white;" viewBox="0 0 24 24"></svg>
+                    Run
+                </button>
+
+                <div class="grid grid-cols-1 mt-3 pr-2 overflow-auto">
+                    <div class="">
+                        <div v-if="docs[16]['try']">
+                            <h3 class="font-medium">REQUEST URL<sup class="text-red-500 font-bold"> *required</sup></h3>
+                            <p class="text-xs pb-2 font-medium text-gray-500">Enter your request URL with query params</p>
+                            <prism-editor class="my-prism-editor"
+                            style="padding:15px 0px 15px 0px;min-height:20px;background:#2d2d2d;color: #ccc;resize:both;"
+                            v-model="docs[16]['url']" :highlight="highlighter" line-numbers></prism-editor>
+                            <br>
+                                                        <h3 class="font-medium">REQUEST BODY<sup class="text-red-500"> *required</sup></h3>
+                            <p class="text-xs pb-2 font-medium text-gray-500">JSON body for the POST|PUT|DELETE request</p>
+                            <prism-editor
+                                class="my-prism-editor"
+                                style="min-height:200px;background:#2d2d2d;color: #ccc;resize:both"
+                                v-model="docs[16]['body']"
+                                :highlight="highlighter"
+                                line-numbers></prism-editor>
+                                                    </div>
+                    </div>
+                    <hr class="border-b border-dotted mt-4 mb-2 border-gray-300">
+                    <div class="grid grid-cols-2 gap-2" v-if="docs[16]['response'] && !docs[16]['cancel']">
+                        <div class="border-r-2">
+                            <h3 class="font-medium">
+                                RESPONSE
+                                <p class="text-xs pt-2 pb-2 font-medium text-gray-500">
+                                    Response status, code and time.
+                                </p>
+                            </h3>
+                            <table class="table-fixed text-sm mt-5">
+                                <tbody>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Status</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                            v-if="docs[16]['responseOk']"
+                                            class="inline-flex  text-xs font-bold leading-none text-green-700">
+                                                SUCCESS
+                                            </span>
+                                            <span
+                                                v-if="!docs[16]['responseOk']"
+                                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-500 rounded">
+                                                ERROR
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Status Code</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                                v-if="docs[16]['responseOk']"
+                                                class="inline-flex text-xs font-bold text-green-900"
+                                                v-text="docs[16]['responseCode']">
+                                            </span>
+                                            <span
+                                                v-if="!docs[16]['responseOk']"
+                                                class="inline-flex text-xs font-bold text-red-900"
+                                                v-text="docs[16]['responseCode']">
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Memory Usage</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                                v-if="docs[16]['memory']"
+                                                class="inline-flex text-xs font-bold text-red-900"
+                                                v-text="docs[16]['memory']">
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Response Time</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                                v-if="docs[16]['responseTime']"
+                                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-800 bg-yellow-400 rounded"
+                                                v-text="docs[16]['responseTime'] + 'ms'">
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs pt-2 pb-2 font-medium text-gray-500">
+                                Response headers.
+                            </p>
+                            <prism-editor
+                                v-if="docs[16]['responseHeaders']"
+                                class="my-prism-editor shadow-inner border-gray-400 border-2 rounded"
+                                style="width:75%;min-height:100px;height:200px;background:#fefefe;color: rgb(66, 63, 63);resize:both"
+                                readonly
+                                v-model="docs[16]['responseHeaders']"
+                                :highlight="highlighterAtom"
+                                line-numbers></prism-editor>
+                        </div>
+                        <div>
+                            <p class="text-xs pb-2 font-medium text-gray-800">Response from the server</p>
+                            <prism-editor
+                                v-if="docs[16]['response']"
+                                class="my-prism-editor shadow-inner border-gray-400 border-2 rounded"
+                                style="min-height:100px;height:300px;background:#2d2d2d;color: #ccc;resize:both"
+                                readonly
+                                v-model="docs[16]['response']"
+                                :highlight="highlighter"
+                                line-numbers></prism-editor>
+                        </div>
+                        <div class="border-r-2">
+                            <h3 class="font-medium mt-10">
+                                SQL
+                            </h3>
+                            <p v-if="!docs[16]['queries'].length" class="text-xs pb-2 font-medium text-gray-500">
+                                No SQL queries executed for this request.
+                            </p>
+                            <p v-if="docs[16]['queries'].length" class="text-xs pb-2 font-medium text-gray-500">
+                                SQL queries executed for this request.
+                                <table class="table-fixed text-sm mt-5">
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Total Queries</td>
+                                            <td class="align-left pl-2 pr-2 break-all">
+                                                <div v-text="docs[16]['queries'].length"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Total Query time</td>
+                                            <td class="align-left pl-2 pr-2 break-all">
+                                                <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-800 bg-yellow-400 rounded">
+                                                    <span v-text="docs[16]['queries'].reduce((total, query) => total + query.time, 0).toFixed(2)"></span>ms
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                        <div class="">
+                                <p class="text-xs mt-10 font-medium text-gray-500">
+                                    SQL queries
+                                </p>
+                                <div v-for="(query, index) in docs[16]['queries']">
+                                    <p class="mt-2 text-sm font-medium">{{index+1}}.
+                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-800 bg-yellow-500 rounded mb-1">
+                                            {{query.time}}ms
+                                        </span>
+                                    </p>
+                                    <prism-editor
+                                        v-model="sqlFormatter.format(query['sql'])"
+                                        class="my-prism-editor"
+                                        style="padding:10px 0px 10px 0px;min-height:20px;height:350px;background:rgb(52 33 33);color: #ccc;resize:both;"
+                                        readonly
+                                        :highlight="highlighter"
+                                        line-numbers></prism-editor>
+                                </div>
+                        </div>
+                    </div>
+                  </div>
+            </section>
+                        <section class="pt-5 pl-2 pr-2 pb-5 border mb-10 rounded bg-white shadow" v-if="!docs[17]['isHidden']">
+                <div class="font-sans" id="DELETE-api/types/{type}">
+                <h1 class="text-sm break-normal text-black bg-indigo-50 break-normal font-sans pb-1 pt-1 text-black">
+                    <span class="w-20
+                        font-medium
+                        inline-flex
+                        items-center
+                        justify-center
+                        px-2
+                        py-1
+                        text-xs
+                        font-bold
+                        leading-none
+                        rounded
+                        text--100 bg--500
+                        text- bg--500
+                        text--100 bg--500
+                        text--100 bg--500
+                        text-white bg-black
+                        ">
+                        DELETE
+                    </span>
+                    <span class="">
+                        <a href="#api/types/{type}">api/types/{type}</a>
+                    </span>
+                </h1>
+                </div>
+                <hr class="border-b border-grey-light">
+
+                <table class="table-fixed text-sm mt-5">
+                    <tbody>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">HTTP Method</td>
+                            <td class="align-left pl-2 pr-2 font-bold break-all">DELETE</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">URL</td>
+                            <td class="align-left pl-2 pr-2 break-all">
+                                <a target="_blank" href="{{window.location.origin}}/api/types/{type}">{{window.location.origin}}/api/types/{type}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Controller</td>
+                            <td class="align-left pl-2 pr-2 break-all">App\Http\Controllers\Api\TypeController</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Controller Method</td>
+                            <td class="align-left pl-2 pr-2 break-all">@destroy</td>
+                        </tr>
+                                                    <tr>
+                                <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Middleware 1</td>
+                                <td class="align-left pl-2 pr-2 break-all">api</td>
+                            </tr>
+                                                    <tr>
+                                <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Middleware 2</td>
+                                <td class="align-left pl-2 pr-2 break-all">auth:sanctum</td>
+                            </tr>
+                                            </tbody>
+                </table>
+                <div v-if="docs[17]['docBlock']" class="border-2 mr-4 mt-4 p-4 rounded text-sm">
+                    <h3 class="font-bold">LRD Docs</h3>
+                    <vue-markdown></vue-markdown>
+                </div>
+                <br>
+                                <button
+                    class="hover:bg-red-500 font-semibold hover:text-white mt-2 pl-5 pr-5 border-gray-700 hover:border-transparent shadow-inner border-2 rounded-full"
+                    v-if="!docs[17]['try']"
+                    v-on:click="docs[17]['try'] = !docs[17]['try'];docs[17]['cancel'] = !docs[17]['cancel']"
+                >
+                    Try
+                </button>
+
+                <button
+                    class="hover:bg-red-500 font-semibold hover:text-white mt-2 pl-5 pr-5 border-gray-700 hover:border-transparent shadow-inner border-2 rounded-full"
+                    v-if="!docs[17]['cancel']"
+                    v-on:click="docs[17]['cancel'] = !docs[17]['cancel'];docs[17]['try'] = !docs[17]['try'];"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    v-if="docs[17]['try']"
+                    @click="request(docs[17])"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 border-blue-800 border-2 shadow-inner mb-1 pl-5 pr-5 rounded-full"
+                >
+                    <svg
+                        v-if="docs[17]['loading']"
+                        class="animate-spin h-4 w-4 rounded-full bg-transparent border-2 border-transparent border-opacity-50 inline pr-2" style="border-right-color: white; border-top-color: white;" viewBox="0 0 24 24"></svg>
+                    Run
+                </button>
+
+                <div class="grid grid-cols-1 mt-3 pr-2 overflow-auto">
+                    <div class="">
+                        <div v-if="docs[17]['try']">
+                            <h3 class="font-medium">REQUEST URL<sup class="text-red-500 font-bold"> *required</sup></h3>
+                            <p class="text-xs pb-2 font-medium text-gray-500">Enter your request URL with query params</p>
+                            <prism-editor class="my-prism-editor"
+                            style="padding:15px 0px 15px 0px;min-height:20px;background:#2d2d2d;color: #ccc;resize:both;"
+                            v-model="docs[17]['url']" :highlight="highlighter" line-numbers></prism-editor>
+                            <br>
+                                                        <h3 class="font-medium">REQUEST BODY<sup class="text-red-500"> *required</sup></h3>
+                            <p class="text-xs pb-2 font-medium text-gray-500">JSON body for the POST|PUT|DELETE request</p>
+                            <prism-editor
+                                class="my-prism-editor"
+                                style="min-height:200px;background:#2d2d2d;color: #ccc;resize:both"
+                                v-model="docs[17]['body']"
+                                :highlight="highlighter"
+                                line-numbers></prism-editor>
+                                                    </div>
+                    </div>
+                    <hr class="border-b border-dotted mt-4 mb-2 border-gray-300">
+                    <div class="grid grid-cols-2 gap-2" v-if="docs[17]['response'] && !docs[17]['cancel']">
+                        <div class="border-r-2">
+                            <h3 class="font-medium">
+                                RESPONSE
+                                <p class="text-xs pt-2 pb-2 font-medium text-gray-500">
+                                    Response status, code and time.
+                                </p>
+                            </h3>
+                            <table class="table-fixed text-sm mt-5">
+                                <tbody>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Status</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                            v-if="docs[17]['responseOk']"
+                                            class="inline-flex  text-xs font-bold leading-none text-green-700">
+                                                SUCCESS
+                                            </span>
+                                            <span
+                                                v-if="!docs[17]['responseOk']"
+                                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-500 rounded">
+                                                ERROR
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Status Code</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                                v-if="docs[17]['responseOk']"
+                                                class="inline-flex text-xs font-bold text-green-900"
+                                                v-text="docs[17]['responseCode']">
+                                            </span>
+                                            <span
+                                                v-if="!docs[17]['responseOk']"
+                                                class="inline-flex text-xs font-bold text-red-900"
+                                                v-text="docs[17]['responseCode']">
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Memory Usage</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                                v-if="docs[17]['memory']"
+                                                class="inline-flex text-xs font-bold text-red-900"
+                                                v-text="docs[17]['memory']">
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Response Time</td>
+                                        <td class="align-left pl-2 pr-2 break-all">
+                                            <span
+                                                v-if="docs[17]['responseTime']"
+                                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-800 bg-yellow-400 rounded"
+                                                v-text="docs[17]['responseTime'] + 'ms'">
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs pt-2 pb-2 font-medium text-gray-500">
+                                Response headers.
+                            </p>
+                            <prism-editor
+                                v-if="docs[17]['responseHeaders']"
+                                class="my-prism-editor shadow-inner border-gray-400 border-2 rounded"
+                                style="width:75%;min-height:100px;height:200px;background:#fefefe;color: rgb(66, 63, 63);resize:both"
+                                readonly
+                                v-model="docs[17]['responseHeaders']"
+                                :highlight="highlighterAtom"
+                                line-numbers></prism-editor>
+                        </div>
+                        <div>
+                            <p class="text-xs pb-2 font-medium text-gray-800">Response from the server</p>
+                            <prism-editor
+                                v-if="docs[17]['response']"
+                                class="my-prism-editor shadow-inner border-gray-400 border-2 rounded"
+                                style="min-height:100px;height:300px;background:#2d2d2d;color: #ccc;resize:both"
+                                readonly
+                                v-model="docs[17]['response']"
+                                :highlight="highlighter"
+                                line-numbers></prism-editor>
+                        </div>
+                        <div class="border-r-2">
+                            <h3 class="font-medium mt-10">
+                                SQL
+                            </h3>
+                            <p v-if="!docs[17]['queries'].length" class="text-xs pb-2 font-medium text-gray-500">
+                                No SQL queries executed for this request.
+                            </p>
+                            <p v-if="docs[17]['queries'].length" class="text-xs pb-2 font-medium text-gray-500">
+                                SQL queries executed for this request.
+                                <table class="table-fixed text-sm mt-5">
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Total Queries</td>
+                                            <td class="align-left pl-2 pr-2 break-all">
+                                                <div v-text="docs[17]['queries'].length"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-left pl-2 pr-2 bg-gray-100 border-r-2">Total Query time</td>
+                                            <td class="align-left pl-2 pr-2 break-all">
+                                                <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-800 bg-yellow-400 rounded">
+                                                    <span v-text="docs[17]['queries'].reduce((total, query) => total + query.time, 0).toFixed(2)"></span>ms
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                        <div class="">
+                                <p class="text-xs mt-10 font-medium text-gray-500">
+                                    SQL queries
+                                </p>
+                                <div v-for="(query, index) in docs[17]['queries']">
+                                    <p class="mt-2 text-sm font-medium">{{index+1}}.
+                                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-800 bg-yellow-500 rounded mb-1">
+                                            {{query.time}}ms
+                                        </span>
+                                    </p>
+                                    <prism-editor
+                                        v-model="sqlFormatter.format(query['sql'])"
+                                        class="my-prism-editor"
+                                        style="padding:10px 0px 10px 0px;min-height:20px;height:350px;background:rgb(52 33 33);color: #ccc;resize:both;"
+                                        readonly
+                                        :highlight="highlighter"
+                                        line-numbers></prism-editor>
+                                </div>
+                        </div>
+                    </div>
+                  </div>
+            </section>
                      </div>
       </div>
       <script>
@@ -5536,7 +6114,7 @@
 
             return validations
         }
-        var docs = [{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"],"middlewares":["web"],"controller":"CsrfCookieController","controller_full_path":"Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/health-check","methods":["GET","HEAD"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"HealthCheckController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController","method":"__invoke","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/legalacts","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"index","httpMethod":"GET","rules":{"title":["string|nullable"],"description":["string|nullable"],"start_act_date":["date|nullable"],"end_act_date":["date|nullable"],"paginate":["integer|nullable"],"order_by":["nullable|App\\Rules\\ValidFieldsFromLegalAct"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"index","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types\/{type}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/execute-solution","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"ExecuteSolutionController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController","method":"__invoke","httpMethod":"POST","rules":{"solution":["required"],"parameters":["array"]},"docBlock":""},{"uri":"_ignition\/update-config","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"UpdateConfigController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController","method":"__invoke","httpMethod":"POST","rules":{"theme":["required|Illuminate\\Validation\\Rules\\In"],"editor":["required"],"hide_solutions":["required|boolean"]},"docBlock":""},{"uri":"api\/auth\/register","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"createUser","httpMethod":"POST","rules":{"name":["required"],"email":["required|email|unique:users,email"],"password":["required"]},"docBlock":""},{"uri":"api\/auth\/login","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"loginUser","httpMethod":"POST","rules":{"email":["required|email"],"password":["required"]},"docBlock":""},{"uri":"api\/legalacts","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"store","httpMethod":"POST","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"store","httpMethod":"POST","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""}];
+        var docs = [{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"],"middlewares":["web"],"controller":"CsrfCookieController","controller_full_path":"Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/health-check","methods":["GET","HEAD"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"HealthCheckController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController","method":"__invoke","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/legalacts","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"index","httpMethod":"GET","rules":{"title":["string|nullable"],"description":["string|nullable"],"start_act_date":["date|nullable"],"end_act_date":["date|nullable"],"paginate":["integer|nullable"],"order_by":["nullable|App\\Rules\\ValidFieldsFromLegalAct"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"index","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types\/{type}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/execute-solution","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"ExecuteSolutionController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController","method":"__invoke","httpMethod":"POST","rules":{"solution":["required"],"parameters":["array"]},"docBlock":""},{"uri":"_ignition\/update-config","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"UpdateConfigController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController","method":"__invoke","httpMethod":"POST","rules":{"theme":["required|Illuminate\\Validation\\Rules\\In"],"editor":["required"],"hide_solutions":["required|boolean"]},"docBlock":""},{"uri":"api\/auth\/register","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"createUser","httpMethod":"POST","rules":{"name":["required"],"email":["required|email|unique:users,email"],"password":["required"]},"docBlock":""},{"uri":"api\/auth\/login","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"loginUser","httpMethod":"POST","rules":{"email":["required|email"],"password":["required"]},"docBlock":""},{"uri":"api\/legalacts","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"store","httpMethod":"POST","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"store","httpMethod":"POST","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["DELETE"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"destroy","httpMethod":"DELETE","rules":[],"docBlock":""},{"uri":"api\/types\/{type}","methods":["DELETE"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"destroy","httpMethod":"DELETE","rules":[],"docBlock":""}];
         var app_url = "http:\/\/localhost";
 
         //remove trailing slash if any

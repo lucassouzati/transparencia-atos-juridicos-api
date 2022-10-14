@@ -24,11 +24,11 @@ class LegalActRequest extends FormRequest
     public function rules()
     {
         return [
-            'act_date' =>'required',
+            'act_date' =>'required|date',
             'title' => 'required',
-            'type_id'=>'required',
+            'type_id'=>'required|integer',
             'description' =>'required',
-            'published' => 'required'
+            'published' => 'required|boolean'
         ];
     }
 
