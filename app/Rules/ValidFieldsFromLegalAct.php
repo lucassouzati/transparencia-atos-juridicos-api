@@ -24,7 +24,7 @@ class ValidFieldsFromLegalAct implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if (!in_array($value, $this->legalAct->getFillable())) {
+        if (!in_array($value, $this->legalAct->getTableColumns())) {
             $fail('The :attribute must be a attibute from LegalAct.');
         }
     }

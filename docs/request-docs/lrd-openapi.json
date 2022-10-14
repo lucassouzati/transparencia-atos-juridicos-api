@@ -237,7 +237,7 @@
                     },
                     {
                         "name": "paginate",
-                        "description": "integer",
+                        "description": "integer|nullable",
                         "in": "query",
                         "style": "form",
                         "required": false,
@@ -1383,7 +1383,23 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "properties": []
+                                "properties": {
+                                    "name": {
+                                        "type": "object",
+                                        "nullable": false,
+                                        "format": "object"
+                                    },
+                                    "email": {
+                                        "type": "object",
+                                        "nullable": false,
+                                        "format": "object"
+                                    },
+                                    "password": {
+                                        "type": "object",
+                                        "nullable": false,
+                                        "format": "object"
+                                    }
+                                }
                             }
                         }
                     }
@@ -1482,7 +1498,18 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "properties": []
+                                "properties": {
+                                    "email": {
+                                        "type": "object",
+                                        "nullable": false,
+                                        "format": "object"
+                                    },
+                                    "password": {
+                                        "type": "object",
+                                        "nullable": false,
+                                        "format": "object"
+                                    }
+                                }
                             }
                         }
                     }

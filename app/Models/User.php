@@ -53,4 +53,5 @@ class User extends Authenticatable
             get: fn($value, $attributes) => $attributes['profile'] == "admin"
         );
     }
+
 }

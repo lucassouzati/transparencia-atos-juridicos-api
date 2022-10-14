@@ -40,4 +40,8 @@ class LegalAct extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
+
 }

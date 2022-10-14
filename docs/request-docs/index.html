@@ -1441,12 +1441,13 @@
                                                                                             <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-800 bg-blue-300 rounded">Integer</span>
                                                                                                                                                                                                                                 								                                                    </td>
                         <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-100 text-center">
-                                                                                                                </td>
+                                                                                            <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none rounded">Nullable</span>
+                                                                                    </td>
                         <td class="border pl-3 pt-1 pb-1 pr-2 text-center">
                                                                                                                 </td>
                         <td class="border pl-3 pr-2 break-all">
                             <div class="font-mono">
-                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                        </div>
                         </td>
                     </tr>
                                         <tr class="border">
@@ -3010,6 +3011,74 @@
                     <vue-markdown></vue-markdown>
                 </div>
                 <br>
+                                <table class="table-fixed align-left text-sm mt-5">
+                    <thead class="border">
+                    <tr class="border">
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">No.</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Attributes</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Type</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Nullable</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Bail</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Rules</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                        <tr class="border">
+                        <td class="border pl-3 pt-1 pb-1 pr-2">1</td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-200">
+                            name
+                                                                                            <sup class="text-red-500 font-bold"> *required</sup>
+                                                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2">
+                                                                                                                                                                                                                                                            								                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-100 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pr-2 break-all">
+                            <div class="font-mono">
+                                                                                                                                                                                                            </div>
+                        </td>
+                    </tr>
+                                        <tr class="border">
+                        <td class="border pl-3 pt-1 pb-1 pr-2">2</td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-200">
+                            email
+                                                                                            <sup class="text-red-500 font-bold"> *required</sup>
+                                                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2">
+                                                                                                                                                                                                                                                            								                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-100 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pr-2 break-all">
+                            <div class="font-mono">
+                                                                                                                                                                                                                                    email
+                                                                                        <span class="text-gray-900 font-bold">|</span>
+                                                                                                                                                                                                            unique:users,email
+                                                                                                                                                                                    </div>
+                        </td>
+                    </tr>
+                                        <tr class="border">
+                        <td class="border pl-3 pt-1 pb-1 pr-2">3</td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-200">
+                            password
+                                                                                            <sup class="text-red-500 font-bold"> *required</sup>
+                                                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2">
+                                                                                                                                                                                                                                                            								                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-100 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pr-2 break-all">
+                            <div class="font-mono">
+                                                                                                                                                                                                            </div>
+                        </td>
+                    </tr>
+                                        </tbody>
+                </table>
                                 <button
                     class="hover:bg-red-500 font-semibold hover:text-white mt-2 pl-5 pr-5 border-gray-700 hover:border-transparent shadow-inner border-2 rounded-full"
                     v-if="!docs[8]['try']"
@@ -3253,6 +3322,55 @@
                     <vue-markdown></vue-markdown>
                 </div>
                 <br>
+                                <table class="table-fixed align-left text-sm mt-5">
+                    <thead class="border">
+                    <tr class="border">
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">No.</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Attributes</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Type</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Nullable</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Bail</th>
+                        <th class="border border-gray-300 pl-2 pr-16 pt-1 pb-1 w-min text-left bg-gray-200">Rules</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                        <tr class="border">
+                        <td class="border pl-3 pt-1 pb-1 pr-2">1</td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-200">
+                            email
+                                                                                            <sup class="text-red-500 font-bold"> *required</sup>
+                                                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2">
+                                                                                                                                                                                                                                                            								                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-100 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pr-2 break-all">
+                            <div class="font-mono">
+                                                                                                                                                                                                                                    email
+                                                                                                                                                                                    </div>
+                        </td>
+                    </tr>
+                                        <tr class="border">
+                        <td class="border pl-3 pt-1 pb-1 pr-2">2</td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-200">
+                            password
+                                                                                            <sup class="text-red-500 font-bold"> *required</sup>
+                                                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2">
+                                                                                                                                                                                                                                                            								                                                    </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 bg-gray-100 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pt-1 pb-1 pr-2 text-center">
+                                                                                                                </td>
+                        <td class="border pl-3 pr-2 break-all">
+                            <div class="font-mono">
+                                                                                                                                                                                                            </div>
+                        </td>
+                    </tr>
+                                        </tbody>
+                </table>
                                 <button
                     class="hover:bg-red-500 font-semibold hover:text-white mt-2 pl-5 pr-5 border-gray-700 hover:border-transparent shadow-inner border-2 rounded-full"
                     v-if="!docs[9]['try']"
@@ -5418,7 +5536,7 @@
 
             return validations
         }
-        var docs = [{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"],"middlewares":["web"],"controller":"CsrfCookieController","controller_full_path":"Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/health-check","methods":["GET","HEAD"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"HealthCheckController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController","method":"__invoke","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/legalacts","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"index","httpMethod":"GET","rules":{"title":["string|nullable"],"description":["string|nullable"],"start_act_date":["date|nullable"],"end_act_date":["date|nullable"],"paginate":["integer"],"order_by":["nullable|App\\Rules\\ValidFieldsFromLegalAct"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"index","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types\/{type}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/execute-solution","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"ExecuteSolutionController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController","method":"__invoke","httpMethod":"POST","rules":{"solution":["required"],"parameters":["array"]},"docBlock":""},{"uri":"_ignition\/update-config","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"UpdateConfigController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController","method":"__invoke","httpMethod":"POST","rules":{"theme":["required|Illuminate\\Validation\\Rules\\In"],"editor":["required"],"hide_solutions":["required|boolean"]},"docBlock":""},{"uri":"api\/auth\/register","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"createUser","httpMethod":"POST","rules":[],"docBlock":""},{"uri":"api\/auth\/login","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"loginUser","httpMethod":"POST","rules":[],"docBlock":""},{"uri":"api\/legalacts","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"store","httpMethod":"POST","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"store","httpMethod":"POST","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""}];
+        var docs = [{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"],"middlewares":["web"],"controller":"CsrfCookieController","controller_full_path":"Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/health-check","methods":["GET","HEAD"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"HealthCheckController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\HealthCheckController","method":"__invoke","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/legalacts","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"index","httpMethod":"GET","rules":{"title":["string|nullable"],"description":["string|nullable"],"start_act_date":["date|nullable"],"end_act_date":["date|nullable"],"paginate":["integer|nullable"],"order_by":["nullable|App\\Rules\\ValidFieldsFromLegalAct"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"index","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"api\/types\/{type}","methods":["GET","HEAD"],"middlewares":["api"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"show","httpMethod":"GET","rules":[],"docBlock":""},{"uri":"_ignition\/execute-solution","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"ExecuteSolutionController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\ExecuteSolutionController","method":"__invoke","httpMethod":"POST","rules":{"solution":["required"],"parameters":["array"]},"docBlock":""},{"uri":"_ignition\/update-config","methods":["POST"],"middlewares":["Spatie\\LaravelIgnition\\Http\\Middleware\\RunnableSolutionsEnabled"],"controller":"UpdateConfigController","controller_full_path":"Spatie\\LaravelIgnition\\Http\\Controllers\\UpdateConfigController","method":"__invoke","httpMethod":"POST","rules":{"theme":["required|Illuminate\\Validation\\Rules\\In"],"editor":["required"],"hide_solutions":["required|boolean"]},"docBlock":""},{"uri":"api\/auth\/register","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"createUser","httpMethod":"POST","rules":{"name":["required"],"email":["required|email|unique:users,email"],"password":["required"]},"docBlock":""},{"uri":"api\/auth\/login","methods":["POST"],"middlewares":["api"],"controller":"AuthController","controller_full_path":"App\\Http\\Controllers\\Api\\AuthController","method":"loginUser","httpMethod":"POST","rules":{"email":["required|email"],"password":["required"]},"docBlock":""},{"uri":"api\/legalacts","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"store","httpMethod":"POST","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types","methods":["POST"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"store","httpMethod":"POST","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""},{"uri":"api\/legalacts\/{legalact}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"LegalActController","controller_full_path":"App\\Http\\Controllers\\Api\\LegalActController","method":"update","httpMethod":"PUT","rules":{"act_date":["required"],"title":["required"],"type_id":["required"],"description":["required"],"published":["required"]},"docBlock":""},{"uri":"api\/types\/{type}","methods":["PUT","PATCH"],"middlewares":["api","auth:sanctum"],"controller":"TypeController","controller_full_path":"App\\Http\\Controllers\\Api\\TypeController","method":"update","httpMethod":"PUT","rules":{"name":["required"],"description":["required"]},"docBlock":""}];
         var app_url = "http:\/\/localhost";
 
         //remove trailing slash if any
