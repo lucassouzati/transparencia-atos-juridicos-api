@@ -15,7 +15,7 @@ class LegalActControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)
-            ->postJson('/api/legalacts',
+            ->postJson(route('legalacts.store'),
             LegalAct::factory()->create()->toArray());
 
         $response->assertStatus(201);
@@ -30,7 +30,7 @@ class LegalActControllerTest extends TestCase
         $legalact->title = "teste 2";
 
         $response = $this->actingAs($user)
-            ->patchJson('/api/legalacts/'. $legalact->id,
+            ->patchJson(route('legalacts.update',  [$legalact->id]),
             $legalact->toArray());
 
         $response->assertStatus(200);
@@ -42,7 +42,7 @@ class LegalActControllerTest extends TestCase
         $legalact = LegalAct::factory()->create();
 
         $response = $this->actingAs($user)
-            ->deleteJson('/api/legalacts/'. $legalact->id,
+            ->deleteJson(route('legalacts.destroy', [$legalact->id]),
             $legalact->toArray());
 
         $response->assertStatus(204);
@@ -56,7 +56,7 @@ class LegalActControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)
-            ->postJson('/api/legalacts',
+            ->postJson(route('legalacts.store'),
             $invalidData);
 
         $response->assertInvalid($invalidFields)
@@ -108,5 +108,18 @@ class LegalActControllerTest extends TestCase
         ];
     }
 
+    public function test_can_use_filters_in_legal_act_index()
+    {
+        $response = $this->getJson(route('legalacts.index'),
+        [
+            'title' => fake()->name(),
+            'description' => fake()->sentence(),
+            'start_act_date' => fake()->date(),
+            'end_act_date' => fake()->date(),
+            'paginate' => '100',
+            'order_by' => '',
+        ]);
 
+        $response->assertSuccessful();
+    }
 }
