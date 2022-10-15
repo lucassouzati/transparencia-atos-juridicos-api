@@ -55,8 +55,20 @@ class TypeController extends Controller
 ### Proteção de rotas
 
 
+### Documentação de API
+Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei uma biblioteca terceira que se baseia nos design patterns do Laravel para gerar uma documentação com todos end points e seus parâmetros.
 
 ## Boas práticas em Laravel
+
+## Form Requests
+
+## Custom Validation Rules
+
+## Testes automatizados
+
+## Melhorias futuras
+
+## Como rodar esse projeto
 
 Em construção ... 🔨
 
