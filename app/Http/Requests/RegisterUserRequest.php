@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class RegisterUserRequest extends FormRequest
 {
@@ -32,10 +31,4 @@ class RegisterUserRequest extends FormRequest
         ];
     }
 
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn ($value) => Hash::make(($value))
-        );
-    }
 }

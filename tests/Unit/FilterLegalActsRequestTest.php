@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Http\Requests\FilterLegalActsRequest;
+use App\Http\Requests\LegalAct\FilterLegalActsRequest;
 use App\Models\LegalAct;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;

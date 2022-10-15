@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\LegalAct;
+use Illuminate\Http\UploadedFile;
+use App\Http\Resources\LegalActResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LegalActControllerTest extends TestCase
@@ -14,9 +16,18 @@ class LegalActControllerTest extends TestCase
     public function test_storing_a_legal_act()
     {
         $user = User::factory()->create();
+        // dd(new LegalActResource(LegalAct::factory()->create()));
+        $legalact = LegalAct::factory()->make();
         $response = $this->actingAs($user)
             ->postJson(route('legalacts.store'),
-            LegalAct::factory()->create()->toArray());
+            [
+                'act_date' => $legalact->act_date,
+                'title' => $legalact->title,
+                'description' => $legalact->description,
+                'type_id' => $legalact->type_id,
+                'published' => $legalact->published,
+                'file' => UploadedFile::fake()->create('test.pdf'),
+            ]);
 
         $response->assertStatus(201);
     }
@@ -30,8 +41,14 @@ class LegalActControllerTest extends TestCase
         $legalact->title = "teste 2";
 
         $response = $this->actingAs($user)
-            ->patchJson(route('legalacts.update',  [$legalact->id]),
-            $legalact->toArray());
+            ->patchJson(route('legalacts.update',  [$legalact->id]), [
+                'act_date' => $legalact->act_date,
+                'title' => $legalact->title,
+                'description' => $legalact->description,
+                'type_id' => $legalact->type_id,
+                'published' => $legalact->published,
+                ]
+            );
 
         $response->assertStatus(200);
     }

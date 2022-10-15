@@ -26,9 +26,9 @@ class LegalActRequest extends FormRequest
     {
         return [
             'act_date' =>'required|date',
-            'title' => 'required',
+            'title' => 'required|string',
             'type_id'=>'required|integer',
-            'description' =>'required',
+            'description' =>'required|string',
             'published' => 'required|boolean',
             'file' => ['required', File::types('pdf')->max(100 * 1024)]
         ];

@@ -67,6 +67,7 @@ class LegalActController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @QAparam file required PDF File with max size 20MB
      */
     public function store(LegalActRequest $request)
     {
