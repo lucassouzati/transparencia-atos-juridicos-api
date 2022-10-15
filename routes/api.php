@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
     ]);
 });
 
+Route::get('/legalacts/{legalact}/file', [LegalActController::class, 'getFile'])->name('legalact.getfile');
 
 
 Route::get('/', function () {

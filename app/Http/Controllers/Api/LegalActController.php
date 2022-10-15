@@ -125,4 +125,13 @@ class LegalActController extends Controller
         $legalAct->delete();
         return response()->json([null], 204);
     }
+
+    public function getFile($id)
+    {
+        $legalAct = LegalAct::findOrFail($id);
+        return Storage::temporaryUrl(
+            $legalAct->id.'/'.$legalAct->file,
+            now()->addMinutes(5),
+        );
+    }
 }
