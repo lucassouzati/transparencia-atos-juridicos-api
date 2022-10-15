@@ -14,7 +14,7 @@ Caso encontre algum erro, ou abordagem que poderia ser melhorada, não hesite em
 
 ## Features
 
-# CRUD
+### CRUD
 
 Deve ser possível adicionar, visualizat, editar e remover registros referente a Atos Jurídicos (Legal Acts).
 
@@ -52,7 +52,8 @@ class TypeController extends Controller
 }
 
 ```
-# Proteção de rotas
+### Proteção de rotas
+
 
 
 ## Boas práticas em Laravel
