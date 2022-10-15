@@ -53,18 +53,88 @@ class TypeController extends Controller
 
 ```
 ### Proteção de rotas
-
-
+As rotas de listagem e visualização de Atos Jurídicos são públicas.
+```php
+Route::apiResource('legalacts', LegalActController::class)->only([
+    'index', 'show'
+]);
+```
+As rotas para manipulação de registros são protegidas via autenticação por token, e também por política de autorização.
+```php
+Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
+    Route::apiResource('legalacts', LegalActController::class)->only([
+        'store', 'update', 'destroy'
+    ]);
+});
+```
 ### Documentação de API
-Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei uma biblioteca terceira que se baseia nos design patterns do Laravel para gerar uma documentação com todos end points e seus parâmetros.
+Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei um pacote terceiro chamado Laravel Request Doc, que se trata de uma alternativa ao Swagger e se baseia nos design patterns do Laravel para gerar uma documentação com todos endpoints e seus parâmetros. 
+(img)
+Além disso é possível fazer chamadas na própria documentação, verificando os retornos de cada endpoint. 
+(img)
 
+### Filtro de Atos Jurídicos
+No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através do FormRequest FilterLegalActRequest, o pacote Laravel Request Doc documenta automaticamente os possívels parâmetros da pesquisa.
+(img)
+
+### Validação de políticas de autorização
+Como regra de negócio, foi definido a existência de dois perfis de acesso, sendo o perfil "Administrador" e perfil "Cidadão". O perfil Cidadão se refere ao usuário que poderá se cadastrar no sistema para receber notificações de novos atos jurídicos publicados. Porém não atos jurídicos não publicados não devem aparecer para ele. Dessa forma, foi aplicado uma diretiva de acesso em um escopo global de consulta do model LegalAct.
+```php
+class LegalAct extends Model
+{
+    ...
+    protected static function booted()
+        {
+                static::addGlobalScope('published', function (Builder $builder) {
+                        if (!auth('sanctum')->check())
+                        {
+                            $builder->where('published', true);
+
+                        }
+                        else if (auth('sanctum')->user()->cannot('see_published_legalacts'))
+                        {
+                            $builder->where('published', true);
+                        }
+                });
+        }
+     ...
+ } 
+```
+```php
+class AuthServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        ...
+        Gate::define('see_published_legalacts', function (User $user) {
+            return $user->isAdmin;
+        });
+        ...
+    }
+
+}
+```
+O atributo isAdmin foi implementado através de um acessor que verifica o perfil de cadastro do Usuário.
+```php
+class User extends Authenticatable
+{
+    ...
+    protected function isAdmin() : Attribute
+    {
+        return Attribute::make(
+            get: fn($value, $attributes) => $attributes['profile'] == "admin"
+        );
+    }
+    ...
+}
+```
 ## Boas práticas em Laravel
 
-## Form Requests
+### Form Requests
 
-## Custom Validation Rules
+### Custom Validation Rules
 
-## Testes automatizados
+### Testes automatizados
 
 ## Melhorias futuras
 
