@@ -5,7 +5,8 @@ namespace App\Http\Requests\LegalAct;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\File;
 
-class LegalActRequest extends FormRequest
+
+class LegalActUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,8 +31,7 @@ class LegalActRequest extends FormRequest
             'type_id'=>'required|integer',
             'description' =>'required',
             'published' => 'required|boolean',
-            'file' => ['required', File::types('pdf')->max(100 * 1024)]
+            'file' => ['nullable', File::types('pdf')->max(100 * 1024)]
         ];
     }
-
 }

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\LegalAct;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\FilterLegalActsRequest;
-use App\Http\Resources\LegalActResource;
-use App\Http\Requests\LegalAct\LegalActRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\LegalActResource;
+use App\Http\Requests\FilterLegalActsRequest;
+use App\Http\Requests\LegalAct\LegalActRequest;
+use App\Http\Requests\LegalAct\LegalActUpdateRequest;
 
 class LegalActController extends Controller
 {
@@ -69,6 +71,8 @@ class LegalActController extends Controller
     public function store(LegalActRequest $request)
     {
         $legalAct = LegalAct::create($request->all());
+        $file = $request->file('file');
+        Storage::putFileAs($legalAct->id, $file, $file->getClientOriginalName());
 
         return new LegalActResource($legalAct);
     }
@@ -92,10 +96,19 @@ class LegalActController extends Controller
      * @param  \App\Models\LegalAct  $legalAct
      * @return \Illuminate\Http\Response
      */
-    public function update(LegalActRequest $request, $id)
+    public function update(LegalActUpdateRequest $request, $id)
     {
         $legalAct = LegalAct::findOrFail($id);
+        if($request->file('file'))
+        {
+            // dd($legalAct->id.'/'.$legalAct->file);
+            Storage::delete($legalAct->id.'/'.$legalAct->file);
+            $file = $request->file('file');
+            Storage::putFileAs($legalAct->id, $file, $file->getClientOriginalName());
+        }
+
         $legalAct->fill($request->validated())->save();
+
         return new LegalActResource($legalAct);
     }
 
@@ -108,6 +121,7 @@ class LegalActController extends Controller
     public function destroy($id)
     {
         $legalAct = LegalAct::findOrFail($id);
+        Storage::deleteDirectory($legalAct->id);
         $legalAct->delete();
         return response()->json([null], 204);
     }
