@@ -114,6 +114,8 @@ class AuthServiceProvider extends ServiceProvider
 
 }
 ```
+## Boas práticas em Laravel
+### Acessors and Mutators
 O atributo isAdmin foi implementado através de um acessor que verifica o perfil de cadastro do Usuário.
 ```php
 class User extends Authenticatable
@@ -128,9 +130,37 @@ class User extends Authenticatable
     ...
 }
 ```
-## Boas práticas em Laravel
+Ao salvar um Ato Jurídico (Legal Act), é utilizado um mutator para obter o nome do arquivo proveniente da request e salvar no atributo "file". Os arquivos estão salvos no bucket da S3, e no banco fica apenas o nome do mesmo.
+```php
+class LegalAct extends Model
+{
+    ...
+    protected function file(): Attribute
+        {
+            return Attribute::make(
+                set: fn($value) => $value->getClientOriginalName()
+            );
+        }
+     ...
+ } 
+```
 
 ### Form Requests
+O uso de Form Requests do Laravel encapsula a lógica de validação de uma requisição, fazendo com o que o uso de repetição de código no Controller seja evitado, bem como cria a possibilidade de replicar a validação para outras situações. No exemplo a seguir, foi criado a classe RegisterUserRequest na qual constam as validações do cadastro de usuário. Essa validação foi implementa no AuthController da api da aplicação. Se caso for necessário futuramente a criação de um login web que não seja por ai, ela vai poder ser reaproveitada.
+```php
+class RegisterUserRequest extends FormRequest
+{
+    ...
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required'
+        ];
+    }
+}
+```
 
 ### Custom Validation Rules
 
