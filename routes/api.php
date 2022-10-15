@@ -35,7 +35,7 @@ Route::apiResource('types', TypeController::class)->only([
     'index', 'show'
 ]);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
     Route::apiResource('legalacts', LegalActController::class)->only([
         'store', 'update', 'destroy'
     ]);

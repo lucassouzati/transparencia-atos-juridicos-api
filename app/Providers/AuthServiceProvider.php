@@ -37,5 +37,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin;
         });
 
+        Gate::define('manage_records', function (User $user) {
+            return $user->isAdmin;
+        });
+
+
     }
 }
