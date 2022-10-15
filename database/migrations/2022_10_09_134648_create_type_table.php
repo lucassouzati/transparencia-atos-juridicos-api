@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Type::insert([

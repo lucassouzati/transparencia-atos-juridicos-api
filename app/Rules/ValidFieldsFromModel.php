@@ -2,18 +2,15 @@
 
 namespace App\Rules;
 
-use App\Models\LegalAct;
 use Illuminate\Contracts\Validation\InvokableRule;
 use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
 
-class ValidFieldsFromLegalAct implements InvokableRule
+class ValidFieldsFromModel implements InvokableRule
 {
-    private LegalAct $legalAct;
-
-    public function __construct()
-    {
-        $this->legalAct = new LegalAct();
-    }
+    public function __construct(
+        protected Model $class,
+    ) {}
     /**
      * Run the validation rule.
      *
@@ -24,8 +21,8 @@ class ValidFieldsFromLegalAct implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if (!in_array($value, $this->legalAct->getTableColumns())) {
-            $fail('The :attribute must be a attibute from LegalAct.');
+        if (!in_array($value, $this->class->getTableColumns())) {
+            $fail('The :attribute must be a attibute from ' . class_basename($this->class::class));
         }
     }
 }

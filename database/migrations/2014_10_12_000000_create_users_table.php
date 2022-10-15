@@ -22,6 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->enum('profile', ["admin", "citizen"])->default('citizen');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

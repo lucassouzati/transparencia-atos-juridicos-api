@@ -3,7 +3,7 @@
 namespace App\Http\Requests\LegalAct;
 
 use App\Models\LegalAct;
-use App\Rules\ValidFieldsFromLegalAct;
+use App\Rules\ValidFieldsFromModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FilterLegalActsRequest extends FormRequest
@@ -31,7 +31,7 @@ class FilterLegalActsRequest extends FormRequest
             'start_act_date' => 'date|nullable',
             'end_act_date' => 'date|nullable',
             'paginate' => 'integer|nullable',
-            'order_by' => ['nullable', new ValidFieldsFromLegalAct()]
+            'order_by' => ['nullable', new ValidFieldsFromModel(new LegalAct())]
         ];
     }
 

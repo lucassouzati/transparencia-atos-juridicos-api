@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\LegalActResource;
-use App\Http\Requests\FilterLegalActsRequest;
+use App\Http\Requests\LegalAct\FilterLegalActsRequest;
 use App\Http\Requests\LegalAct\LegalActRequest;
 use App\Http\Requests\LegalAct\LegalActUpdateRequest;
 
@@ -101,7 +101,6 @@ class LegalActController extends Controller
         $legalAct = LegalAct::findOrFail($id);
         if($request->file('file'))
         {
-            // dd($legalAct->id.'/'.$legalAct->file);
             Storage::delete($legalAct->id.'/'.$legalAct->file);
             $file = $request->file('file');
             Storage::putFileAs($legalAct->id, $file, $file->getClientOriginalName());
