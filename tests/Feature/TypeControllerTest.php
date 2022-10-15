@@ -10,12 +10,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TypeControllerTest extends TestCase
 {
+    public function test_listing_types()
+    {
+        $response = $this->getJson(route('types.index'));
+        $response->assertStatus(200);
+    }
+
+    public function test_showing_types()
+    {
+        $type = Type::factory()->create();
+        $response = $this->getJson(route('types.show', [$type->id]));
+        $response->assertStatus(200);
+    }
+
     public function test_storing_a_type()
     {
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->postJson('/api/types', Type::factory()->create()->toArray());
+            ->postJson(route('types.store'), Type::factory()->create()->toArray());
 
         $response->assertStatus(201);
     }
@@ -29,7 +42,7 @@ class TypeControllerTest extends TestCase
         $type->title = "teste 2";
 
         $response = $this->actingAs($user)
-            ->patchJson('/api/types/'. $type->id, $type->toArray());
+            ->patchJson(route('types.update', [$type->id]), $type->toArray());
 
         $response->assertStatus(200);
     }
@@ -40,8 +53,7 @@ class TypeControllerTest extends TestCase
         $type = Type::inRandomOrder()->first();
 
         $response = $this->actingAs($user)
-            ->deleteJson('/api/types/'. $type->id,
-            $type->toArray());
+            ->deleteJson(route('types.destroy', [$type->id]));
 
         $response->assertStatus(204);
     }
@@ -54,7 +66,7 @@ class TypeControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)
-            ->postJson('/api/types',
+            ->postJson(route('types.store'),
             $invalidData);
 
         $response->assertInvalid($invalidFields)

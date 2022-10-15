@@ -48,6 +48,18 @@ class LegalActControllerTest extends TestCase
         $response->assertStatus(204);
     }
 
+    public function test_showing_a_legal_act()
+    {
+        $user = User::factory()->create();
+        $legalact = LegalAct::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->getJson(route('legalacts.show', [$legalact->id]),
+            $legalact->toArray());
+
+        $response->assertStatus(200);
+    }
+
     /**
      * @test
      * @dataProvider legalActInvalidFields
@@ -108,18 +120,100 @@ class LegalActControllerTest extends TestCase
         ];
     }
 
-    public function test_can_use_filters_in_legal_act_index()
+    /**
+     * @test
+     * @dataProvider filtersLegalActIndex
+     */
+    public function can_use_filters_in_legal_act_index($filterExamples, $expectedResults)
     {
-        $response = $this->getJson(route('legalacts.index'),
-        [
-            'title' => fake()->name(),
-            'description' => fake()->sentence(),
-            'start_act_date' => fake()->date(),
-            'end_act_date' => fake()->date(),
-            'paginate' => '100',
-            'order_by' => '',
-        ]);
-
-        $response->assertSuccessful();
+        $response = $this->getJson(route('legalacts.index', $filterExamples));
+        $response->assertStatus($expectedResults);
     }
+
+    public function filtersLegalActIndex()
+    {
+        return [
+            'withAllParameters' =>
+            [
+                [
+                    'title' => "teste",
+                    'description' => "teste teste",
+                    'type_id' => 1,
+                    'start_act_date' => '2022-01-01',
+                    'end_act_date' => '2022-01-01',
+                    'paginate' => 100,
+                    'order_by' => 'created_at',
+                ],
+                200
+            ],
+            'withoutEndActDate' =>
+            [
+                [
+                    'title' => "teste",
+                    'description' => 'teste teste',
+                    'type_id' => 1,
+                    'start_act_date' => '2022-01-01',
+                    'paginate' => 100,
+                    'order_by' => 'created_at',
+                ],
+                200
+            ],
+            'withoutStartActDate' =>
+            [
+                [
+                    'title' => "teste",
+                    'description' => 'teste teste',
+                    'type_id' => 1,
+                    'end_act_date' => '2022-01-01',
+                    'paginate' => 100,
+                    'order_by' => 'created_at',
+                ],
+                200
+            ],
+            'withoutPaginate' =>
+            [
+                [
+                    'title' => "teste",
+                    'description' => 'teste teste',
+                    'type_id' => 1,
+                    'start_act_date' => '2022-01-01',
+                    'end_act_date' => '2022-01-01',
+                    'order_by' => 'created_at',
+                ],
+                200
+            ],
+            'withoutOrderBy' =>
+            [
+                [
+                    'title' => "teste",
+                    'description' => 'teste teste',
+                    'type_id' => 1,
+                    'start_act_date' => '2022-01-01',
+                    'end_act_date' => '2022-01-01',
+                    'paginate' => 100,
+                ],
+                200
+            ],
+        ];
+    }
+
+    public function test_if_a_user_not_authorized_cannot_see_a_published_legal_act()
+    {
+        $legalact = LegalAct::factory()->create(['published' => 0]);
+        $user = User::create([ 'name' => "Sr. teste",
+        'email' => "teste@teste.com",
+        'profile' => "citizen",
+        'password' =>  'teste1234']);
+        $response = $this->actingAs($user)->getJson(route('legalacts.show', [$legalact->id]));
+        $response->assertStatus(404);
+    }
+
+    public function test_if_a_user_not_authenticated_cannot_see_a_published_legal_act()
+    {
+        $legalact = LegalAct::factory()->create(['published' => 0]);
+        $response = $this->getJson(route('legalacts.show', [$legalact->id]));
+        $response->assertStatus(404);
+    }
+
+
 }
