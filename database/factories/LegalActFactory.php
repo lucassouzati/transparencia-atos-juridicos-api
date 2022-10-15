@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\LegalAct;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class LegalActFactory extends Factory
             'title' => fake()->word(),
             'type_id' => fake()->randomDigitNot(0),
             'description' => fake()->sentence(),
-            'file' => fake()->word(),
+            'file' => UploadedFile::fake()->create('test.pdf'),
             'published' => 1,
         ];
     }
