@@ -208,7 +208,7 @@ class LegalAct extends Model
  } 
 ```
 
-### 🔴 Form Requests
+### Form Requests
 O uso de [Form Requests](https://laravel.com/docs/9.x/validation#form-request-validation) do Laravel encapsula a lógica de validação de uma requisição, fazendo com o que o uso de repetição de código no Controller seja evitado, bem como cria a possibilidade de replicar a validação para outras situações. No exemplo a seguir, foi criado a classe RegisterUserRequest na qual constam as validações do cadastro de usuário. Essa validação foi implementada no AuthController da api da aplicação. Se caso for necessário futuramente a criação de um login web que não seja por ai, ela vai poder ser reaproveitada.
 ```php
 class RegisterUserRequest extends FormRequest
@@ -290,13 +290,14 @@ Através da diretiva "QUEUE_CONNECTION=redis" no ".env", o Laravel passa a salva
 ### Testes automatizados
 Pra quem não está ambientado com testes automatizados, certamente não está sendo tão produtivo quanto poderia ser. Eu tendo a programar meus testes junto com a funcionalidade que estou implementando, pois considero consigo testá-la de forma muito mais eficiente. Em vez de abrir janelas ou requisições em api, garanto uma forma bem mais rápida de testar todo meu sistema, garantido que assim nenhuma outra funcionalidade seja quebrada. Meu objetivo é um dia conseguir usar TDD (Test Driven Development) de forma abrangente em todos meus sistemas. 
 Por ora, almejo ao menos garantir pelo menos 80% de cobertura de testes nos meus projetos. 
- <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/test-examples.png" width="1024px" />
-    <img alt="request-docs" title="login-page" src=".github/readme/test-examples-coverage.png" width="1024px" />
+<h4 align="center">
+    <img alt="Testes automatizados rodando no terminal" src=".github/readme/test-examples.png" width="1024px" />
+    <img alt="Relatório de cobertura de testes" src=".github/readme/test-examples-coverage.png" width="1024px" />
 </h4>
-Por padrão o Laravel Sail não vem com a cobertura de testes do XDEBUG ativada, porém você pode ativá-la com seguinte modificação do docker-compose.y`ml:
+
+Por padrão o Laravel Sail não vem com a cobertura de testes do XDEBUG ativada, porém você pode ativá-la com seguinte modificação do docker-compose.yml:
 ```
-XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-coverage}'
+XDEBUG_MODE: \'${SAIL_XDEBUG_MODE:-coverage}\'
 ```
 Depois basta apenas executar:
 ```
