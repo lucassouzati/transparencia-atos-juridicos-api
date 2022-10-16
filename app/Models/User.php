@@ -49,6 +49,11 @@ class User extends Authenticatable
         'id_admin' => 'boolean'
     ];
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
     protected function isAdmin() : Attribute
     {
         return Attribute::make(

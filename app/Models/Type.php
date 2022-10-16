@@ -37,4 +37,9 @@ class Type extends Model
     {
         return $this->hasMany(LegalAct::class);
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

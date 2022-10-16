@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->enum('profile', ["admin", "citizen"])->default('citizen');
+            $table->foreignUuid('user_id');
+            $table->bigInteger('type_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+
+        });
+
+        Schema::table('subscriptions', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('type_id')->references('id')->on('types');
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('subscriptions');
     }
 };

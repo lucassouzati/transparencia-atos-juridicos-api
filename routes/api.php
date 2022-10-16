@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\LegalActController;
-
+use App\Http\Controllers\Api\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,12 @@ use App\Http\Controllers\Api\LegalActController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/', function () {
+    return response()->json([
+        'message' => 'This is a simple example of item returned by your APIs. Everyone can see it.'
+    ]);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -46,9 +52,9 @@ Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
 
 Route::get('/legalacts/{legalact}/file', [LegalActController::class, 'getFile'])->name('legalact.getfile');
 
-
-Route::get('/', function () {
-    return response()->json([
-        'message' => 'This is a simple example of item returned by your APIs. Everyone can see it.'
-    ]);
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::apiResource('subscription', SubscriptionController::class);
 });
+
+
+
