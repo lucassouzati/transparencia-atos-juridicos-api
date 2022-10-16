@@ -28,7 +28,7 @@ Caso encontre algum erro, ou abordagem que poderia ser melhorada, não hesite em
 
 ### CRUD
 
-Deve ser possível adicionar, visualizat, editar e remover registros referente a Atos Jurídicos (Legal Acts).
+Deve ser possível adicionar, visualizar, editar e remover registros referente a Atos Jurídicos (Legal Acts).
 
 Todo Ato Jurídico pertence a um Tipo (Type), através do relacionamento belongsTo na model LegalAct
 
