@@ -29,7 +29,6 @@ class SendPublishedLegalActForTypeNotification
     {
         $subscriptions = $event->legalAct->type->subscriptions()->get();
         $legalAct = $event->legalAct;
-        // dd($subscriptions);
         $subscriptions->each(fn ($subscription) => $subscription->user->notify(new LegalActPublishedNotification($legalAct)));
 
         $legalAct->notificated = 1;
