@@ -2,7 +2,7 @@
     Transparência de Atos Jurídicos API
 </h1>
 
-## Sobre o projeto
+## 🛥️ Sobre o projeto
 
 Para fins de demonstração e aprendizado, resolvi reconstruir um sistema meu antigo, utilizando as melhores práticas e tecnologias atuais referente ao cenário backend PHP e Laravel. Nesse repositório, encontra-se uma API que servirá de apoio a outro sistema frontend. 
 
@@ -12,7 +12,7 @@ Nos tópicos deste documento, exemplificarei as escolhas adotadas no desenvolvim
 
 Caso encontre algum erro, ou abordagem que poderia ser melhorada, não hesite em entrar em contato ou abrir uma PR. Eu também me considero um eterno aprendiz, e sei que ainda tenho muito a melhorar. Acredito que a força da comunidade que nos torna fortes. 
 
-## Tecnologias:
+## 🏗️ Tecnologias:
 - **[PHP 8.1](https://www.php.net)**
 - **[Laravel](https://laravel.com/)**
 - **[MySQL](https://www.mysql.com/)**
@@ -24,7 +24,7 @@ Caso encontre algum erro, ou abordagem que poderia ser melhorada, não hesite em
 - **[PHPUnit](https://phpunit.de)**
 - **[FakePHP](https://fakerphp.github.io)** 
 
-## Features
+## 🧑‍💻 Features
 
 ### CRUD
 
@@ -177,7 +177,7 @@ class LegalActController extends Controller
     <img alt="request-docs" title="login-page" src=".github/readme/notification-example.png" width="1024px" />
 </h4>
 
-## Boas práticas em Laravel
+## 🔝 Boas práticas em Laravel
 ### Acessors and Mutators
 O atributo isAdmin foi implementado através de um [acessor](https://laravel.com/docs/9.x/eloquent-mutators#defining-an-accessor) que verifica o perfil de cadastro do Usuário.
 ```php
@@ -208,7 +208,7 @@ class LegalAct extends Model
  } 
 ```
 
-### Form Requests
+### 🔴 Form Requests
 O uso de [Form Requests](https://laravel.com/docs/9.x/validation#form-request-validation) do Laravel encapsula a lógica de validação de uma requisição, fazendo com o que o uso de repetição de código no Controller seja evitado, bem como cria a possibilidade de replicar a validação para outras situações. No exemplo a seguir, foi criado a classe RegisterUserRequest na qual constam as validações do cadastro de usuário. Essa validação foi implementada no AuthController da api da aplicação. Se caso for necessário futuramente a criação de um login web que não seja por ai, ela vai poder ser reaproveitada.
 ```php
 class RegisterUserRequest extends FormRequest
@@ -302,7 +302,7 @@ Depois basta apenas executar:
 ```
 sail build --no-cache
 ```
-### Ferramentas extras para testes
+### 🛠️ Ferramentas extras para testes
 O Laravel Sail possui ferramentas que facilitam a vida do desenvolvimento, como o [MailHog](https://github.com/mailhog/MailHog) para testar envio de e-mails. Ele funciona interceptando e-mails enviados pela aplicação desenvolvida, provendo uma interface para verificá-los.
 <h4 align="center">
     <img alt="request-docs" title="login-page" src=".github/readme/mailhog-usage.png" width="1024px" />
@@ -312,10 +312,44 @@ Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um s
     <img alt="request-docs" title="login-page" src=".github/readme/minio-usage.png" width="1024px" />
 </h4>
 
-## Melhorias futuras
+## 🆙 Melhorias futuras
 - [ ] Refatorar a classe LegalActController, criando uma camada de repositório LegalActRepository para agrupar as parametrizações de filtros e querys.
 
-## Como rodar esse projeto
+## 🚀 Como rodar esse projeto
+Se você estiver usando Windows, vai precisar do WSL para rodar esse projeto de forma prática. Para isso, você pode instalá-lo seguindo o seguinte [tutorial](https://learn.microsoft.com/pt-br/windows/wsl/install). Também será necessário uma distribuição linux para utilizar o WSL. Recomendo o Ubuntu que pode ser baixando na própria Microsoft Store no [link](https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV). 
+Depois, vai precisar do Docker, o qual a versão de Windows pode ser encontrada [aqui](https://docs.docker.com/desktop/install/windows-install/).
+Então, clone o projeto dentro do WSL, vá para pasta dele e execute o comando:
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+E agora para instalar o Sail, execute os comandos:
+```
+composer require laravel/sail --dev
+```
+```
+php artisan sail:install --with=mysql,redis,minio,mailhog
+```
+Por fim, execute o seguinte comando para rodar o projeto:
+```
+./vendor/bin/sail up
+```
+## 🤔 Como contribuir para o projeto
 
-Em construção ... 🔨
+- Faça um **fork** do projeto;
+- Crie uma nova branch com as suas alterações: `git checkout -b my-feature`
+- Salve as alterações e crie uma mensagem de commit contando o que você fez:`git commit -m "feature: My new feature"`
+- Envie as suas alterações: `git push origin my-feature`
+
+> Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](https://github.com/firstcontributions/first-contributions)
+
+## 📝 Licença
+
+Este projeto esta sobe a licença MIT. Veja a [LICENÇA](https://opensource.org/licenses/MIT) para saber mais.
+
+Feito com ❤️ por Lucas Siqueira 👋🏽 [Entre em contato!](https://www.linkedin.com/in/lucas-de-souza-siqueira-a6469952/)
 
