@@ -86,14 +86,14 @@ Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de c
 </h4>
 Além disso é possível fazer chamadas na própria documentação, verificando os retornos de cada endpoint. 
 <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/request-docs-login.png" width="1024px" />
-    <img alt="request-docs" title="login-page" src=".github/readme/request-docs-login-return.png" width="1024px" />
+    <img alt="Exemplo do uso do Laravel Request Docs" src=".github/readme/request-docs-login.png" width="1024px" />
+    <img alt="Exemplo de retorno de requisiçao com Laravel Request Docs" src=".github/readme/request-docs-login-return.png" width="1024px" />
 </h4>
 
 ### Filtro de Atos Jurídicos
 No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através do FormRequest FilterLegalActRequest, o pacote Laravel Request Doc documenta automaticamente os possívels parâmetros da pesquisa.
 <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/request-docs-filter-legal-request.png" width="1024px" />
+    <img alt="Usando o Laravel Request Docs para filtrar atos jurídicos" src=".github/readme/request-docs-filter-legal-request.png" width="1024px" />
 </h4>
 
 ### Validação de políticas de autorização
@@ -152,7 +152,7 @@ class LegalActController extends Controller
 ### Subscrição para receber notificação referente a novos atos jurídicos
 Foi implementado novos endpoints que permitem o gerenciamento de subscrições, as quais serão utilizadas para notificar aos usuários sobre a publicação de novos atos jurídicos. Por exemplo, o usuário deseja receber notificações a novos atos jurídicos do tipo "Aviso de Licitação", então quando um novo ato for publicado, o sistema irá dispará um evento que notificará todos que um novo ato foi publicado, conforme exemplo na imagem a seguir. 
 <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/notification-example.png" width="1024px" />
+    <img alt="Exemplo de e-mail criado pelo Laravel" src=".github/readme/notification-example.png" width="1024px" />
 </h4>
 
 O disparo desse evento acontece no controller após o salvamento do ato jurídico(legal act).
@@ -173,9 +173,6 @@ class LegalActController extends Controller
     ...
  } 
  ```
- <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/notification-example.png" width="1024px" />
-</h4>
 
 ## 🔝 Boas práticas em Laravel
 ### Acessors and Mutators
@@ -193,7 +190,7 @@ class User extends Authenticatable
     ...
 }
 ```
-Ao salvar um Ato Jurídico (Legal Act), é utilizado um [mutator](https://laravel.com/docs/9.x/eloquent-mutators#defining-a-mutator) para obter o nome do arquivo proveniente da request e salvar no atributo "file". Os arquivos estão salvos no bucket da S3, e no banco fica apenas o nome do mesmo.
+Ao salvar um Ato Jurídico (Legal Act), é utilizado um [mutator](https://laravel.com/docs/9.x/eloquent-mutators#defining-a-mutator) para obter o nome do arquivo proveniente da request e salvar no atributo "file". Os arquivos estão salvos no bucket da S3, separados em pastas com a referência do id do ato jurídico, e no banco fica apenas o nome do arquivo na tabela "legalacts".
 ```php
 class LegalAct extends Model
 {
@@ -209,7 +206,7 @@ class LegalAct extends Model
 ```
 
 ### Form Requests
-O uso de [Form Requests](https://laravel.com/docs/9.x/validation#form-request-validation) do Laravel encapsula a lógica de validação de uma requisição, fazendo com o que o uso de repetição de código no Controller seja evitado, bem como cria a possibilidade de replicar a validação para outras situações. No exemplo a seguir, foi criado a classe RegisterUserRequest na qual constam as validações do cadastro de usuário. Essa validação foi implementada no AuthController da api da aplicação. Se caso for necessário futuramente a criação de um login web que não seja por ai, ela vai poder ser reaproveitada.
+O uso de [Form Requests](https://laravel.com/docs/9.x/validation#form-request-validation) do Laravel encapsula a lógica de validação de uma requisição, fazendo com o que o uso de repetição de código no Controller seja evitado, bem como cria a possibilidade de replicar a validação para outras situações. No exemplo a seguir, foi criado a classe RegisterUserRequest na qual constam as validações do cadastro de usuário. Essa validação foi implementada no AuthController da api da aplicação. Se caso for necessário futuramente a criação de um login web por outro endpoint, ela vai poder ser reaproveitada.
 ```php
 class RegisterUserRequest extends FormRequest
 {
@@ -280,15 +277,15 @@ class LegalActPublishedNotification extends Notification implements ShouldQueue
     ...
 }
 ```
-Para a execução dos jobs de forma assíncrona, é necessário que os mesmos estejam salvos em algum cache para poderem serem processados pelos workers(processo chamado para executar a fila através do comando "artisan queue:work"). Para isso, a solução ideal é um armazenamento versátil de estrutura de dados em memória, de acesso rápido e dinâmico, que prioriza o desempenho. Então, escolheu-se utilizar o [Redis](https://redis.io/), que atende todos esses requistos, é open-source e já vem configurado na instalação do Laravel Sail. 
+Para a execução dos jobs de forma assíncrona, é necessário que os mesmos estejam salvos em algum cache para poderem serem processados pelos workers(processo chamado para executar a fila através do comando "artisan queue:work"). Para isso, a solução ideal é um armazenamento versátil de estrutura de dados em memória de acesso rápido e dinâmico, que prioriza o desempenho. Então, escolheu-se utilizar o [Redis](https://redis.io/), que atende todos esses requistos, é open-source, amplamente utilizado e já vem configurado na instalação do Laravel Sail. 
 Através da diretiva "QUEUE_CONNECTION=redis" no ".env", o Laravel passa a salvar automaticamente os jobs no redis, o qual permite o rápido acesso pelos workers executando em paralelo.
  <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/redis-table-plus.png" width="1024px" />
-    <img alt="request-docs" title="login-page" src=".github/readme/notification-example-terminal.png" width="1024px" />
+    <img alt="Visualização dos jobs cadastrados no Redis" src=".github/readme/redis-table-plus.png" width="1024px" />
+    <img alt="Workers executando os jobs cadastrados no Redis" src=".github/readme/notification-example-terminal.png" width="1024px" />
 </h4>
 
 ### Testes automatizados
-Pra quem não está ambientado com testes automatizados, certamente não está sendo tão produtivo quanto poderia ser. Eu tendo a programar meus testes junto com a funcionalidade que estou implementando, pois considero consigo testá-la de forma muito mais eficiente. Em vez de abrir janelas ou requisições em api, garanto uma forma bem mais rápida de testar todo meu sistema, garantido que assim nenhuma outra funcionalidade seja quebrada. Meu objetivo é um dia conseguir usar TDD (Test Driven Development) de forma abrangente em todos meus sistemas. 
+Pra quem não está ambientado com testes automatizados, certamente não está sendo tão produtivo quanto poderia ser. Eu tendo a programar meus testes junto com a funcionalidade que estou implementando, pois considero que consigo testá-la de forma muito mais eficiente. Em vez de abrir janelas ou requisições em api, priorizo uma forma bem mais rápida de testar todo meu sistema, garantindo que assim nenhuma outra funcionalidade seja quebrada. Meu objetivo é um dia conseguir usar TDD (Test Driven Development) de forma abrangente em todos meus sistemas. 
 Por ora, almejo ao menos garantir pelo menos 80% de cobertura de testes nos meus projetos. 
 <h4 align="center">
     <img alt="Testes automatizados rodando no terminal" src=".github/readme/test-examples.png" width="1024px" />
@@ -303,14 +300,14 @@ Depois basta apenas executar:
 ```
 sail build --no-cache
 ```
-### 🛠️ Ferramentas extras para testes
+### Ferramentas extras para testes
 O Laravel Sail possui ferramentas que facilitam a vida do desenvolvimento, como o [MailHog](https://github.com/mailhog/MailHog) para testar envio de e-mails. Ele funciona interceptando e-mails enviados pela aplicação desenvolvida, provendo uma interface para verificá-los.
 <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/mailhog-usage.png" width="1024px" />
+    <img alt="Exemplo do uso do MailHog para conferir e-mails interceptados da aplicação" src=".github/readme/mailhog-usage.png" width="1024px" />
 </h4>
 Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um serviço já integrado a instalação do Laravel Sail, chamado MinIO. Ele é uma ferramenta de código aberto e funciona como um armazenamento em nuvem compativo com o S3, e já tem um container configurado para funcionar com Sail. Então em vez de mandar arquivos para um bucket de teste na Amazon, podemos mandar para o container do MiniIO.  
 <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/minio-usage.png" width="1024px" />
+    <img alt="Tela do minIO com buckets" src=".github/readme/minio-usage.png" width="1024px" />
 </h4>
 
 ## 🆙 Melhorias futuras
