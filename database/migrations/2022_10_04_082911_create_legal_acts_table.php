@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('file')->nullable();
             $table->boolean('published')->default(0);
+            $table->boolean('notificated')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

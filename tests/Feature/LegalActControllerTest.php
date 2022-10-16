@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\LegalAct;
+use App\Models\Subscription;
 use Illuminate\Http\UploadedFile;
 use App\Http\Resources\LegalActResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -232,5 +233,23 @@ class LegalActControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
+    public function test_storing_a_legal_act_published_with_users_subscripted()
+    {
+        $user = User::factory()->create();
+        $legalact = LegalAct::factory()->make();
+        $subscription = Subscription::create(['user_id'=> $user->id, 'type_id'=>$legalact->type->id]);
 
+        $response = $this->actingAs($user)
+            ->postJson(route('legalacts.store'),
+            [
+                'act_date' => $legalact->act_date,
+                'title' => $legalact->title,
+                'description' => $legalact->description,
+                'type_id' => $legalact->type_id,
+                'published' => 1,
+                'file' => UploadedFile::fake()->create('test.pdf'),
+            ]);
+
+        $response->assertStatus(201);
+    }
 }

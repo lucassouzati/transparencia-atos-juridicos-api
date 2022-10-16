@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\LegalActPublished;
 use App\Models\LegalAct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -75,6 +76,8 @@ class LegalActController extends Controller
         $file = $request->file('file');
         Storage::putFileAs($legalAct->id, $file, $file->getClientOriginalName());
 
+        LegalActPublished::dispatchIf($legalAct->published, $legalAct);
+
         return new LegalActResource($legalAct);
     }
 
@@ -108,6 +111,7 @@ class LegalActController extends Controller
         }
 
         $legalAct->fill($request->validated())->save();
+        LegalActPublished::dispatchIf($legalAct->published && !$legalAct->notificated, $legalAct);
 
         return new LegalActResource($legalAct);
     }

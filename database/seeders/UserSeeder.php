@@ -28,5 +28,7 @@ class UserSeeder extends Seeder
             'password' => 'teste1234',
             'profile' => 'citizen',
         ]);
+
+        // User::factory()->count(1000)->create();
     }
 }

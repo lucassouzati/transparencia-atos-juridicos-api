@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +20,8 @@ class SubscriptionFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
-            'type_id' => fake()->randomDigitNot(0)
+            'user_id' => User::inRandomOrder()->first()->id,
+            'type_id' => 1
         ];
     }
 }
