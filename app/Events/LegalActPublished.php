@@ -20,10 +20,7 @@ class LegalActPublished
      *
      * @return void
      */
-    public function __construct(public LegalAct $legalAct)
-    {
-        //
-    }
+    public function __construct(public LegalAct $legalAct) { }
 
     /**
      * Get the channels the event should broadcast on.

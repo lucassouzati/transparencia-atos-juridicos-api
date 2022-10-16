@@ -42,7 +42,8 @@ class LegalActPublishedNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('O ato '.$this->legalAct->title.' foi cadastrado em nosso portal.')
+                    ->subject('Novo '.$this->legalAct->type->name.' publicado!')
+                    ->line('Olá '.$notifiable->name.'. O ato '.$this->legalAct->title.' foi publicado em nosso portal.')
                     ->action('Para acessá-lo, clique em', url('/legalacts/'.$this->legalAct->id))
                     ->line('Você está recebendo esse e-mail pois ativou notificação referente a novos '.$this->legalAct->type->name.' em nosso site.');
     }
