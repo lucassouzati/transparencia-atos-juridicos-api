@@ -81,13 +81,20 @@ Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
 ```
 ### Documentação de API
 Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei um pacote terceiro chamado Laravel Request Doc, que se trata de uma alternativa ao Swagger e se baseia nos design patterns do Laravel para gerar uma documentação com todos endpoints e seus parâmetros. 
-(img)
+<h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/request-docs.png" width="1024px" />
+</h4>
 Além disso é possível fazer chamadas na própria documentação, verificando os retornos de cada endpoint. 
-(img)
+<h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/request-docs-login.png" width="1024px" />
+    <img alt="request-docs" title="login-page" src=".github/readme/request-docs-login-return.png" width="1024px" />
+</h4>
 
 ### Filtro de Atos Jurídicos
 No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através do FormRequest FilterLegalActRequest, o pacote Laravel Request Doc documenta automaticamente os possívels parâmetros da pesquisa.
-(img)
+<h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/request-docs-filter-legal-request.png" width="1024px" />
+</h4>
 
 ### Validação de políticas de autorização
 Como regra de negócio, foi definido a existência de dois perfis de acesso, sendo o perfil "Administrador" e perfil "Cidadão". O perfil Cidadão se refere ao usuário que poderá se cadastrar no sistema para receber notificações de novos atos jurídicos publicados. Porém atos jurídicos não publicados não devem aparecer para ele. Dessa forma, foi aplicado uma diretiva de acesso em um escopo global de consulta do model LegalAct.
@@ -142,8 +149,11 @@ class LegalActController extends Controller
         }
 }
 ```
-### Subscrição para receber notificaçào referente a novos atos jurídicos
-Foi implementado novos endpoints que permitem o gerenciamento de subscrições, as quais serão utilizadas para notificar aos usuários sobre a publicação de novos atos jurídicos. Por exemplo, o usuário deseja receber notificações a novos atos jurídicos do tipo "Aviso de Licitação", então quando um novo ato for publicado, o sistema irá dispará um evento que notificará todos que um novo ato foi publicado, conforme exemplo na imagem a seguir. (img)
+### Subscrição para receber notificação referente a novos atos jurídicos
+Foi implementado novos endpoints que permitem o gerenciamento de subscrições, as quais serão utilizadas para notificar aos usuários sobre a publicação de novos atos jurídicos. Por exemplo, o usuário deseja receber notificações a novos atos jurídicos do tipo "Aviso de Licitação", então quando um novo ato for publicado, o sistema irá dispará um evento que notificará todos que um novo ato foi publicado, conforme exemplo na imagem a seguir. 
+<h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/notification-example.png" width="1024px" />
+</h4>
 
 O disparo desse evento acontece no controller após o salvamento do ato jurídico(legal act).
 ```php
@@ -163,6 +173,9 @@ class LegalActController extends Controller
     ...
  } 
  ```
+ <h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/notification-example.png" width="1024px" />
+</h4>
 
 ## Boas práticas em Laravel
 ### Acessors and Mutators
@@ -228,15 +241,79 @@ class ValidFieldsFromModel implements InvokableRule
     }
 }
 ```
-Note que a classe da regra foi criada de forma genérica, podendo ser utilizado em outro Model no futuro. 
+Note que a classe da regra foi criada de forma genérica, podendo ser utilizado em outro Model sem ser alterada. 
 ### Eventos e Filas
+Em algumas ocasiões, é esperado que o sistema execute tarefas de forma paralela, para que ele não prenda o usuário em uma espera. No caso desse projeto, foi identificado a necessidade de notificar os usuários subscritos em segundo plano, para que o usuário administrador que tenha cadastrado o ato publicado não fique esperando essa operação. 
+Para isso, foi implementado o padrão de Events e Listeners do Laravel. Ao cadastrar ou atualizar um novo ato jurídico (legal act), é disparado o evento LegalActPublished, que por sua vez ativa a escuta SendPublishedLegalActForTypeNotification .
+```php
+class SendPublishedLegalActForTypeNotification
+{
+    ...
+    public function handle(LegalActPublished $event)
+        {
+            $subscriptions = $event->legalAct->type->subscriptions()->get();
+            $legalAct = $event->legalAct;
+            $subscriptions->each(fn ($subscription) => $subscription->user->notify(new LegalActPublishedNotification($legalAct)));
+
+            $legalAct->notificated = 1;
+            $legalAct->save();
+
+        }
+} 
+```
+Todos usuários vinculados a subscrições relacionada ao tipo do noto ato publicado serão notificados. Após isso, o ato é registrado como "notificado" para não precisar notificar novamente sempre que tiver alguma alteração. 
+Como o número de notificações pode ser alto, é necessário um controle de [filas](https://laravel.com/docs/9.x/queues), o qual o Laravel também já possui implementado. Para esta situação, poderia ser criado um [Job](https://laravel.com/docs/9.x/queues#creating-jobs) para programar a operação, porém o Laravel facilita mais ainda com a possibilidade de implementar a interface ShouldQueue nas classes Notifications, transformando elas em jobs também. 
+```php
+class LegalActPublishedNotification extends Notification implements ShouldQueue
+{
+    use Queueable;
+    public function __construct(public LegalAct $legalAct) { }
+    ...
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+                    ->subject('Novo '.$this->legalAct->type->name.' publicado!')
+                    ->line('Olá '.$notifiable->name.'. O ato '.$this->legalAct->title.' foi publicado em nosso portal.')
+                    ->action('Para acessá-lo, clique em', url('/legalacts/'.$this->legalAct->id))
+                    ->line('Você está recebendo esse e-mail pois ativou notificação referente a novos '.$this->legalAct->type->name.' em nosso site.');
+    }
+    ...
+}
+```
+Para a execução dos jobs de forma assíncrona, é necessário que os mesmos estejam salvos em algum cache para poderem serem processados pelos workers(processo chamado para executar a fila através do comando "artisan queue:work"). Para isso, a solução ideal é um armazenamento versátil de estrutura de dados em memória, de acesso rápido e dinâmico, que prioriza o desempenho. Então, escolheu-se utilizar o [Redis](https://redis.io/), que atende todos esses requistos, é open-source e já vem configurado na instalação do Laravel Sail. 
+Através da diretiva "QUEUE_CONNECTION=redis" no ".env", o Laravel passa a salvar automaticamente os jobs no redis, o qual permite o rápido acesso pelos workers executando em paralelo.
+ <h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/redis-table-plus.png" width="1024px" />
+    <img alt="request-docs" title="login-page" src=".github/readme/notification-example-terminal.png" width="1024px" />
+</h4>
 
 ### Testes automatizados
-Pra quem não está ambientado
-
+Pra quem não está ambientado com testes automatizados, certamente não está sendo tão produtivo quanto poderia ser. Eu tendo a programar meus testes junto com a funcionalidade que estou implementando, pois considero consigo testá-la de forma muito mais eficiente. Em vez de abrir janelas ou requisições em api, garanto uma forma bem mais rápida de testar todo meu sistema, garantido que assim nenhuma outra funcionalidade seja quebrada. Meu objetivo é um dia conseguir usar TDD (Test Driven Development) de forma abrangente em todos meus sistemas. 
+Por ora, almejo ao menos garantir pelo menos 80% de cobertura de testes nos meus projetos. 
+ <h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/test-examples.png" width="1024px" />
+    <img alt="request-docs" title="login-page" src=".github/readme/test-examples-coverage.png" width="1024px" />
+</h4>
+Por padrão o Laravel Sail não vem com a cobertura de testes do XDEBUG ativada, porém você pode ativá-la com seguinte modificação do docker-compose.y`ml:
+```
+XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-coverage}'
+```
+Depois basta apenas executar:
+```
+sail build --no-cache
+```
 ### Ferramentas extras para testes
+O Laravel Sail possui ferramentas que facilitam a vida do desenvolvimento, como o [MailHog](https://github.com/mailhog/MailHog) para testar envio de e-mails. Ele funciona interceptando e-mails enviados pela aplicação desenvolvida, provendo uma interface para verificá-los.
+<h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/mailhog-usage.png" width="1024px" />
+</h4>
+Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um serviço já integrado a instalação do Laravel Sail, chamado MinIO. Ele é uma ferramenta de código aberto e funciona como um armazenamento em nuvem compativo com o S3, e já tem um container configurado para funcionar com Sail. Então em vez de mandar arquivos para um bucket de teste na Amazon, podemos mandar para o container do MiniIO.  
+<h4 align="center">
+    <img alt="request-docs" title="login-page" src=".github/readme/minio-usage.png" width="1024px" />
+</h4>
 
 ## Melhorias futuras
+- [ ] Refatorar a classe LegalActController, criando uma camada de repositório LegalActRepository para agrupar as parametrizações de filtros e querys.
 
 ## Como rodar esse projeto
 
