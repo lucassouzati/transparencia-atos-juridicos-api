@@ -38,9 +38,8 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Type $type)
     {
-        $type = Type::findOrFail($id);
         return new TypeResource($type);
     }
 
@@ -51,9 +50,8 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TypeRequest $request, $id)
+    public function update(TypeRequest $request, Type $type)
     {
-        $type = Type::findOrFail($id);
         $type->fill($request->validated())->save();
         return new TypeResource($type);
     }
@@ -64,9 +62,8 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        $type = Type::findOrFail($id);
         $type->delete();
         return response()->json([null], 204);
     }
