@@ -90,6 +90,8 @@ Além disso é possível fazer chamadas na própria documentação, verificando 
     <img alt="Exemplo de retorno de requisiçao com Laravel Request Docs" src=".github/readme/request-docs-login-return.png" width="1024px" />
 </h4>
 
+Você pode acessá-la pela url "http://localhost/request-docs", supondo que você esteja rodando a aplicação direto na porta 80 do seu computador.
+
 ### Filtro de Atos Jurídicos
 No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através do FormRequest FilterLegalActRequest, o pacote Laravel Request Doc documenta automaticamente os possívels parâmetros da pesquisa.
 <h4 align="center">
