@@ -39,8 +39,8 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           existing_bucket_name: ${{ secrets.AWS_BUCKET }}
-          application_name: MyApplicationName
-          environment_name: MyApplication-Environment
+          application_name: transparencia-atos-juridicos-api
+          environment_name: Transparenciaatosjuridicosapi-env
           version_label: v1.0.0
-          region: us-west-2
+          region: us-east-1
           deployment_package: deploy.zip
