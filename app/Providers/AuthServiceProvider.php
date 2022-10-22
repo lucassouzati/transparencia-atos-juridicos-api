@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -41,6 +43,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isAdmin;
         });
 
-
+        Gate::define('update_subscription', function (User $user, Subscription $subscription) {
+            return $user->isAdmin || $subscription->user->id == $user->id;
+        });
     }
 }
