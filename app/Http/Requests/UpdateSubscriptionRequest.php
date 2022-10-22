@@ -14,7 +14,7 @@ class UpdateSubscriptionRequest extends FormRequest
      */
     public function authorize()
     {
-        $subscription = Subscription::find($this->route('subscription'));
+        $subscription = Subscription::find($this->route('subscription'))->first();
         return $subscription && $this->user()->can('update_subscription', $subscription);
     }
 
