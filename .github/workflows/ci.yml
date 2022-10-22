@@ -27,3 +27,16 @@ jobs:
           php artisan migrate
       - name: Run tests
         run: php artisan test
+      - name: Generate deployment packages
+        run: git archive -o deploy.zip --format=zip HEAD
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          existing_bucket_name: ${{ secrets.AWS_BUCKET }}
+          application_name: MyApplicationName
+          environment_name: MyApplication-Environment
+          version_label: v1.0.0
+          region: us-west-2
+          deployment_package: deploy.zip
