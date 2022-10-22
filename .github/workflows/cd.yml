@@ -9,9 +9,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Generate deployment packages
-        run: |
-          apt-get install -y zip
-          zip -r deploy.zip . -x "vendor/*" "node_modules/*" "*.git*"
+        run: zip -r deploy.zip . -x "vendor/*" "node_modules/*" "*.git*"
       - name: Generate version number
         uses: paulhatch/semantic-version@v4.0.2
         with:
