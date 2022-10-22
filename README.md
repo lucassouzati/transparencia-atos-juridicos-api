@@ -2,7 +2,18 @@
     Transparência de Atos Jurídicos API
 </h1>
 
-## 🛥️ Sobre o projeto
+## Índice
+
+- <a href="#boat-sobre-o-projeto">Sobre o projeto</a>
+- <a href="#hammer-tecnologias">Tecnologias</a>
+- <a href="#computer-features">Features</a>
+- <a href="#top-boas-práticas-em-laravel">Boas práticas em Laravel</a>
+- <a href="#up-melhorias-futuras">Melhorias futuras</a>
+- <a href="#rocket-como-rodar-esse-projeto">Como rodar esse projeto</a>
+- <a href="#raising_hand-como-contribuir-para-o-projeto">Como contribuir para o projeto</a>
+- <a href="#pencil-licença">Licença</a>
+ 
+## :boat: Sobre o projeto
 
 Para fins de demonstração e aprendizado, resolvi reconstruir um sistema meu antigo, utilizando as melhores práticas e tecnologias atuais referente ao cenário backend PHP e Laravel. Nesse repositório, encontra-se uma API que servirá de apoio a outro sistema frontend. 
 
@@ -12,7 +23,7 @@ Nos tópicos deste documento, exemplificarei as escolhas adotadas no desenvolvim
 
 Caso encontre algum erro, ou abordagem que poderia ser melhorada, não hesite em entrar em contato ou abrir uma PR. Eu também me considero um eterno aprendiz, e sei que ainda tenho muito a melhorar. Acredito que a força da comunidade que nos torna fortes. 
 
-## 🏗️ Tecnologias:
+## :hammer: Tecnologias:
 - **[PHP 8.1](https://www.php.net)**
 - **[Laravel](https://laravel.com/)**
 - **[MySQL](https://www.mysql.com/)**
@@ -24,7 +35,7 @@ Caso encontre algum erro, ou abordagem que poderia ser melhorada, não hesite em
 - **[PHPUnit](https://phpunit.de)**
 - **[FakePHP](https://fakerphp.github.io)** 
 
-## 🧑‍💻 Features
+## :computer: Features
 
 ### CRUD
 
@@ -176,7 +187,7 @@ class LegalActController extends Controller
  } 
  ```
 
-## 🔝 Boas práticas em Laravel
+## :top: Boas práticas em Laravel
 ### Acessors and Mutators
 O atributo isAdmin foi implementado através de um [acessor](https://laravel.com/docs/9.x/eloquent-mutators#defining-an-accessor) que verifica o perfil de cadastro do Usuário.
 ```php
@@ -312,10 +323,10 @@ Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um s
     <img alt="Tela do minIO com buckets" src=".github/readme/minio-usage.png" width="1024px" />
 </h4>
 
-## 🆙 Melhorias futuras
+## :up: Melhorias futuras
 - [ ] Refatorar a classe LegalActController, criando uma camada de repositório LegalActRepository para agrupar as parametrizações de filtros e querys.
 
-## 🚀 Como rodar esse projeto
+## :rocket: Como rodar esse projeto
 Se você estiver usando Windows, vai precisar do WSL para rodar esse projeto de forma prática. Para isso, você pode instalá-lo seguindo o seguinte [tutorial](https://learn.microsoft.com/pt-br/windows/wsl/install). Também será necessário uma distribuição linux para utilizar o WSL. Recomendo o Ubuntu que pode ser baixando na própria Microsoft Store no [link](https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV). 
 Depois, vai precisar do Docker, o qual a versão de Windows pode ser encontrada [aqui](https://docs.docker.com/desktop/install/windows-install/).
 Então, clone o projeto dentro do WSL, vá para pasta dele e execute o comando:
@@ -338,7 +349,7 @@ Por fim, execute o seguinte comando para rodar o projeto:
 ```
 ./vendor/bin/sail up
 ```
-## 🤔 Como contribuir para o projeto
+## :raising_hand: Como contribuir para o projeto
 
 - Faça um **fork** do projeto;
 - Crie uma nova branch com as suas alterações: `git checkout -b my-feature`
@@ -347,7 +358,7 @@ Por fim, execute o seguinte comando para rodar o projeto:
 
 > Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](https://github.com/firstcontributions/first-contributions)
 
-## 📝 Licença
+## :pencil: Licença
 
 Este projeto esta sobe a licença MIT. Veja a [LICENÇA](https://opensource.org/licenses/MIT) para saber mais.
 
