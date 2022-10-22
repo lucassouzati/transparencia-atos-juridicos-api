@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - deploy
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate deployment packages
+        run: |
+          apt-get install -y zip
+          zip -r deploy.zip . -x "vendor/*" "node_modules/*" "*.git*"
+      - name: Generate version number
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          branch: "deploy"
+          format: "${major}.${minor}.${patch}-prerelease${increment}"
+          short_tags: ""
+          bump_each_commit: false
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          existing_bucket_name: ${{ secrets.AWS_BUCKET }}
+          application_name: ${{ secrets.application_name }}
+          environment_name: ${{ secrets.environment_name }}
+          version_label: v1.0.1
+          region: us-east-1
+          deployment_package: deploy.zip
+          use_existing_version_if_available: true
+
