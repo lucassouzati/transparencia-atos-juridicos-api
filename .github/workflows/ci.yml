@@ -6,7 +6,7 @@ jobs:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
     services:
       mysql:
-        image: mysql/mysql-server:8.0
+        image: mysql
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: test
