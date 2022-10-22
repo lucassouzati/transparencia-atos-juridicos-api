@@ -4,11 +4,20 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
+    services:
+      mysql:
+        image: mysql/mysql-server:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - name: Prepare Laravel App
-        run: cp .env.example .env
-      - name: Hello Github Actions
-        run: echo "Funcinou"
+        run: |
+          cp .env.ci .env
+          php artisan migrate
