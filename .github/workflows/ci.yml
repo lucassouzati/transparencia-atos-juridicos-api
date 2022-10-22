@@ -27,21 +27,3 @@ jobs:
           php artisan migrate
       - name: Run tests
         run: php artisan test
-      - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: Generate deployment packages
-        run: |
-          apt-get install -y zip
-          zip -r deploy.zip . -x "vendor/*" "node_modules/*" "*.git*"
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v20
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          existing_bucket_name: ${{ secrets.AWS_BUCKET }}
-          application_name: transparencia-atos-juridicos-api
-          environment_name: Transparenciaatosjuridicosapi-env
-          version_label: v1.0.1
-          region: us-east-1
-          deployment_package: deploy.zip
-          use_existing_version_if_available: true
