@@ -43,3 +43,5 @@ jobs:
           environment_name: Transparenciaatosjuridicosapi-env
           version_label: v1.0.0
           region: us-east-1
+          deployment_package: deploy.zip
+          use_existing_version_if_available: true
