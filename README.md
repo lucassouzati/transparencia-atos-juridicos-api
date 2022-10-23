@@ -93,12 +93,12 @@ Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
 ### Documentação de API
 Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei um pacote terceiro chamado Laravel Request Doc, que se trata de uma alternativa ao Swagger e se baseia nos design patterns do Laravel para gerar uma documentação com todos endpoints e seus parâmetros. 
 <h4 align="center">
-    <img alt="request-docs" title="login-page" src=".github/readme/request-docs.png" width="1024px" />
+    <img title="Tela do Laravel Request Docs" src=".github/readme/request-docs.png" width="1024px" />
 </h4>
 Além disso é possível fazer chamadas na própria documentação, verificando os retornos de cada endpoint. 
 <h4 align="center">
-    <img alt="Exemplo do uso do Laravel Request Docs" src=".github/readme/request-docs-login.png" width="1024px" />
-    <img alt="Exemplo de retorno de requisiçao com Laravel Request Docs" src=".github/readme/request-docs-login-return.png" width="1024px" />
+    <img title="Exemplo do uso do Laravel Request Docs" src=".github/readme/request-docs-login.png" width="1024px" />
+    <img title="Exemplo de retorno de requisiçao com Laravel Request Docs" src=".github/readme/request-docs-login-return.png" width="1024px" />
 </h4>
 
 Você pode acessá-la pela url "http://localhost/request-docs", supondo que você esteja rodando a aplicação direto na porta 80 do seu computador.
@@ -106,7 +106,7 @@ Você pode acessá-la pela url "http://localhost/request-docs", supondo que voc�
 ### Filtro de Atos Jurídicos
 No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através do FormRequest FilterLegalActRequest, o pacote Laravel Request Doc documenta automaticamente os possívels parâmetros da pesquisa.
 <h4 align="center">
-    <img alt="Usando o Laravel Request Docs para filtrar atos jurídicos" src=".github/readme/request-docs-filter-legal-request.png" width="1024px" />
+    <img title="Usando o Laravel Request Docs para filtrar atos jurídicos" src=".github/readme/request-docs-filter-legal-request.png" width="1024px" />
 </h4>
 
 ### Validação de políticas de autorização
@@ -165,7 +165,7 @@ class LegalActController extends Controller
 ### Subscrição para receber notificação referente a novos atos jurídicos
 Foi implementado novos endpoints que permitem o gerenciamento de subscrições, as quais serão utilizadas para notificar aos usuários sobre a publicação de novos atos jurídicos. Por exemplo, o usuário deseja receber notificações a novos atos jurídicos do tipo "Aviso de Licitação", então quando um novo ato for publicado, o sistema irá dispará um evento que notificará todos que um novo ato foi publicado, conforme exemplo na imagem a seguir. 
 <h4 align="center">
-    <img alt="Exemplo de e-mail criado pelo Laravel" src=".github/readme/notification-example.png" width="1024px" />
+    <img title="Exemplo de e-mail criado pelo Laravel" src=".github/readme/notification-example.png" width="1024px" />
 </h4>
 
 O disparo desse evento acontece no controller após o salvamento do ato jurídico(legal act).
@@ -293,16 +293,16 @@ class LegalActPublishedNotification extends Notification implements ShouldQueue
 Para a execução dos jobs de forma assíncrona, é necessário que os mesmos estejam salvos em algum cache para poderem serem processados pelos workers(processo chamado para executar a fila através do comando "artisan queue:work"). Para isso, a solução ideal é um armazenamento versátil de estrutura de dados em memória de acesso rápido e dinâmico, que prioriza o desempenho. Então, escolheu-se utilizar o [Redis](https://redis.io/), que atende todos esses requistos, é open-source, amplamente utilizado e já vem configurado na instalação do Laravel Sail. 
 Através da diretiva "QUEUE_CONNECTION=redis" no ".env", o Laravel passa a salvar automaticamente os jobs no redis, o qual permite o rápido acesso pelos workers executando em paralelo.
  <h4 align="center">
-    <img alt="Visualização dos jobs cadastrados no Redis" src=".github/readme/redis-table-plus.png" width="1024px" />
-    <img alt="Workers executando os jobs cadastrados no Redis" src=".github/readme/notification-example-terminal.png" width="1024px" />
+    <img title="Visualização dos jobs cadastrados no Redis" src=".github/readme/redis-table-plus.png" width="1024px" />
+    <img title="Workers executando os jobs cadastrados no Redis" src=".github/readme/notification-example-terminal.png" width="1024px" />
 </h4>
 
 ### Testes automatizados
 Pra quem não está ambientado com testes automatizados, certamente não está sendo tão produtivo quanto poderia ser. Eu tendo a programar meus testes junto com a funcionalidade que estou implementando, pois considero que consigo testá-la de forma muito mais eficiente. Em vez de abrir janelas ou requisições em api, priorizo uma forma bem mais rápida de testar todo meu sistema, garantindo que assim nenhuma outra funcionalidade seja quebrada. Meu objetivo é um dia conseguir usar TDD (Test Driven Development) de forma abrangente em todos meus sistemas. 
 Por ora, almejo ao menos garantir pelo menos 80% de cobertura de testes nos meus projetos. 
 <h4 align="center">
-    <img alt="Testes automatizados rodando no terminal" src=".github/readme/test-examples.png" width="1024px" />
-    <img alt="Relatório de cobertura de testes" src=".github/readme/test-examples-coverage.png" width="1024px" />
+    <img title="Testes automatizados rodando no terminal" src=".github/readme/test-examples.png" width="1024px" />
+    <img title="Relatório de cobertura de testes" src=".github/readme/test-examples-coverage.png" width="1024px" />
 </h4>
 
 Por padrão o Laravel Sail não vem com a cobertura de testes do XDEBUG ativada, porém você pode ativá-la com seguinte modificação do docker-compose.yml:
@@ -313,23 +313,35 @@ Depois basta apenas executar:
 ```
 sail build --no-cache
 ```
+Os testes automatizados são os melhores aliados para reforçar a integralidade do código. Através do Github Actions, foi configurado uma pipeline de Integração Contínua (CI) para rodar os testes a cada push ou pull request no repositório. 
+<h4 align="center">
+    <img title="Testes automatizados no workflow do Github Actions" src=".github/readme/pipeline_ci.png" width="1024px" />
+</h4>
+
 ### Ferramentas extras para testes
 O Laravel Sail possui ferramentas que facilitam a vida do desenvolvimento, como o [MailHog](https://github.com/mailhog/MailHog) para testar envio de e-mails. Ele funciona interceptando e-mails enviados pela aplicação desenvolvida, provendo uma interface para verificá-los.
 <h4 align="center">
-    <img alt="Exemplo do uso do MailHog para conferir e-mails interceptados da aplicação" src=".github/readme/mailhog-usage.png" width="1024px" />
+    <img title="Exemplo do uso do MailHog para conferir e-mails interceptados da aplicação" src=".github/readme/mailhog-usage.png" width="1024px" />
 </h4>
 Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um serviço já integrado a instalação do Laravel Sail, chamado MinIO. Ele é uma ferramenta de código aberto e funciona como um armazenamento em nuvem compativo com o S3, e já tem um container configurado para funcionar com Sail. Então em vez de mandar arquivos para um bucket de teste na Amazon, podemos mandar para o container do MiniIO.  
 <h4 align="center">
-    <img alt="Tela do minIO com buckets" src=".github/readme/minio-usage.png" width="1024px" />
+    <img title="Tela do minIO com buckets" src=".github/readme/minio-usage.png" width="1024px" />
 </h4>
 
 ## :up: Melhorias futuras
 - [ ] Refatorar a classe LegalActController, criando uma camada de repositório LegalActRepository para agrupar as parametrizações de filtros e querys.
 
 ## :rocket: Como rodar esse projeto
-Se você estiver usando Windows, vai precisar do WSL para rodar esse projeto de forma prática. Para isso, você pode instalá-lo seguindo o seguinte [tutorial](https://learn.microsoft.com/pt-br/windows/wsl/install). Também será necessário uma distribuição linux para utilizar o WSL. Recomendo o Ubuntu que pode ser baixando na própria Microsoft Store no [link](https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV). 
-Depois, vai precisar do Docker, o qual a versão de Windows pode ser encontrada [aqui](https://docs.docker.com/desktop/install/windows-install/).
-Então, clone o projeto dentro do WSL, vá para pasta dele e execute o comando:
+Primeiramente, clone este repositório aonde você costuma desenvolver seus projetos:
+```
+git clone git@github.com:lucassouzati/transparencia-atos-juridicos-api.git
+```
+Caso esteja no Windows e não tenha ambiente de desenvolvimento, recomendo que utilize WSL (Windows Subsystem for Linux) junto com Ubuntu, Docker e Laravel Sail. Também serão necessários PHP e Composer configurados no seu ambiente. 
+Em seguida, vá para pasta e execute:
+```
+composer install
+```
+Caso veja algum erro nesse comando, execute o seguinte comando para instalar as dependências do Sail:
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -338,16 +350,25 @@ docker run --rm \
     laravelsail/php81-composer:latest \
     composer install --ignore-platform-reqs
 ```
-E agora para instalar o Sail, execute os comandos:
+Em seguida, crie o .env do projeto
 ```
-composer require laravel/sail --dev
+cp .env.example .env
 ```
+E agora para instalar o Sail com MySQL, execute o comando:
 ```
-php artisan sail:install --with=mysql,redis,minio,mailhog
+php artisan sail:install --with=mysql
 ```
-Por fim, execute o seguinte comando para rodar o projeto:
+E agora para rodar o Sail do Laravel, execute o comando
 ```
-./vendor/bin/sail up
+./vendor/bin/sail up -d
+```
+Configure um alias no seu .bashrc ou equivalente para não precisar especificar o diretório do sail em todos comandos
+```
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+```
+Agora só rodar as migrations e comandos pelo Sail
+```
+sail artisan migrate
 ```
 ## :raising_hand: Como contribuir para o projeto
 
