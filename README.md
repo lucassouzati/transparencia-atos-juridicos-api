@@ -18,7 +18,7 @@
     - <a href="#form-requests">Form Requests</a>
     - <a href="#custom-validation-rules">Custom Validation Rules</a>
     - <a href="#documentação-de-api">Documentação de API</a>
-    - <a href="#eventos-e-filas">Eventos e Filas</a>
+    - <a href="#eventos-e-filas-com-redis">Eventos e Filas com Redis</a>
     - <a href="#testes-automatizados">Testes Automatizados</a>
     - <a href="#ferramentas-extras-para-testes">Ferramentas extras para testes</a>
 - <a href="#up-melhorias-futuras">Melhorias futuras</a>
@@ -265,7 +265,7 @@ Além disso é possível fazer chamadas na própria documentação, verificando 
 </h4>
 
 Você pode acessá-la pela url "http://localhost/request-docs", supondo que você esteja rodando a aplicação direto na porta 80 do seu computador.
-### Eventos e Filas
+### Eventos e Filas com Redis
 Em algumas ocasiões, é esperado que o sistema execute tarefas de forma paralela, para que ele não prenda o usuário em uma espera. No caso desse projeto, foi identificado a necessidade de notificar os usuários subscritos em segundo plano, para que o usuário administrador que tenha cadastrado o ato publicado não fique esperando essa operação. 
 Para isso, foi implementado o padrão de Events e Listeners do Laravel. Ao cadastrar ou atualizar um novo ato jurídico (legal act), é disparado o evento LegalActPublished, que por sua vez ativa a escuta SendPublishedLegalActForTypeNotification .
 ```php
@@ -336,7 +336,8 @@ O Laravel Sail possui ferramentas que facilitam a vida do desenvolvimento, como 
 <h4 align="center">
     <img title="Exemplo do uso do MailHog para conferir e-mails interceptados da aplicação" src=".github/readme/mailhog-usage.png" width="1024px" />
 </h4>
-Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um serviço já integrado a instalação do Laravel Sail, chamado MinIO. Ele é uma ferramenta de código aberto e funciona como um armazenamento em nuvem compativo com o S3, e já tem um container configurado para funcionar com Sail. Então em vez de mandar arquivos para um bucket de teste na Amazon, podemos mandar para o container do MiniIO.  
+
+Quando lidamos com upload de arquivos em buckets da S3, também dispomos de um serviço já integrado a instalação do Laravel Sail, chamado [MinIO](https://min.io/) . Ele é uma ferramenta de código aberto e funciona como um armazenamento em nuvem compativo com o S3, e já tem um container configurado para funcionar com Sail. Então em vez de mandar arquivos para um bucket de teste na Amazon, podemos mandar para o container do MiniIO.  
 <h4 align="center">
     <img title="Tela do minIO com buckets" src=".github/readme/minio-usage.png" width="1024px" />
 </h4>
