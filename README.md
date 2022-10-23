@@ -7,7 +7,20 @@
 - <a href="#boat-sobre-o-projeto">Sobre o projeto</a>
 - <a href="#hammer-tecnologias">Tecnologias</a>
 - <a href="#computer-features">Features</a>
+    - <a href="#crud">CRUD</a>
+    - <a href="#proteção-de-rotas">Proteção de rotas</a>
+    - <a href="#filtro-de-atos-jurídicos">Filtro de Atos Jurídicos</a>
+    - <a href="#validação-de-políticas-de-autorização">Validação de políticas de autorização</a>
+    - <a href="#salvamento-de-arquivos-na-amazon-s3">Salvamento de arquivos na Amazon S3</a>
+    - <a href="#subscrição-para-receber-notificação-referente-a-novos-atos-jurídicos">Subscrição para receber notificação referente a novos atos jurídicos</a>
 - <a href="#top-boas-práticas-em-laravel">Boas práticas em Laravel</a>
+    - <a href="#acessors-and-mutators">Acessors and Mutators</a>
+    - <a href="#form-requests">Form Requests</a>
+    - <a href="#custom-validation-rules">Custom Validation Rules</a>
+    - <a href="#documentação-de-api">Documentação de API</a>
+    - <a href="#eventos-e-filas">Eventos e Filas</a>
+    - <a href="#testes-automatizados">Testes Automatizados</a>
+    - <a href="#ferramentas-extras-para-testes">Ferramentas extras para testes</a>
 - <a href="#up-melhorias-futuras">Melhorias futuras</a>
 - <a href="#rocket-como-rodar-esse-projeto">Como rodar esse projeto</a>
 - <a href="#raising_hand-como-contribuir-para-o-projeto">Como contribuir para o projeto</a>
@@ -90,21 +103,9 @@ Route::middleware(['auth:sanctum', 'can:manage_records'])->group(function () {
     ]);
 });
 ```
-### Documentação de API
-Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei um pacote terceiro chamado Laravel Request Doc, que se trata de uma alternativa ao Swagger e se baseia nos design patterns do Laravel para gerar uma documentação com todos endpoints e seus parâmetros. 
-<h4 align="center">
-    <img title="Tela do Laravel Request Docs" src=".github/readme/request-docs.png" width="1024px" />
-</h4>
-Além disso é possível fazer chamadas na própria documentação, verificando os retornos de cada endpoint. 
-<h4 align="center">
-    <img title="Exemplo do uso do Laravel Request Docs" src=".github/readme/request-docs-login.png" width="1024px" />
-    <img title="Exemplo de retorno de requisiçao com Laravel Request Docs" src=".github/readme/request-docs-login-return.png" width="1024px" />
-</h4>
-
-Você pode acessá-la pela url "http://localhost/request-docs", supondo que você esteja rodando a aplicação direto na porta 80 do seu computador.
 
 ### Filtro de Atos Jurídicos
-No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através do FormRequest FilterLegalActRequest, o pacote Laravel Request Doc documenta automaticamente os possívels parâmetros da pesquisa.
+No end point index de atos jurídicos (api/legalacts) é possível passar parâmetros para filtrar os registros. Através da validação requisição do FormRequest FilterLegalActRequest, deve ser possível colocar filtros como data do ato jurídico, título, etc, bem como a ordenação por atributos da model "LegalAct". A foto a seguir, mostra a estrutura do endpoint através da documentação da API.
 <h4 align="center">
     <img title="Usando o Laravel Request Docs para filtrar atos jurídicos" src=".github/readme/request-docs-filter-legal-request.png" width="1024px" />
 </h4>
@@ -252,6 +253,18 @@ class ValidFieldsFromModel implements InvokableRule
 }
 ```
 Note que a classe da regra foi criada de forma genérica, podendo ser utilizado em outro Model sem ser alterada. 
+### Documentação de API
+Consumir uma API pode ser trabalhoso quando não se tem nenhuma referência de como ela funciona. Pensando nisso, utilizei um pacote terceiro chamado Laravel Request Doc, que se trata de uma alternativa ao Swagger e se baseia nos design patterns do Laravel como os Form Requests e Custom Rules, para gerar uma documentação estática com todos endpoints da aplicação e seus parâmetros. 
+<h4 align="center">
+    <img title="Tela do Laravel Request Docs" src=".github/readme/request-docs.png" width="1024px" />
+</h4>
+Além disso é possível fazer chamadas na própria documentação, verificando os retornos de cada endpoint. 
+<h4 align="center">
+    <img title="Exemplo do uso do Laravel Request Docs" src=".github/readme/request-docs-login.png" width="1024px" />
+    <img title="Exemplo de retorno de requisiçao com Laravel Request Docs" src=".github/readme/request-docs-login-return.png" width="1024px" />
+</h4>
+
+Você pode acessá-la pela url "http://localhost/request-docs", supondo que você esteja rodando a aplicação direto na porta 80 do seu computador.
 ### Eventos e Filas
 Em algumas ocasiões, é esperado que o sistema execute tarefas de forma paralela, para que ele não prenda o usuário em uma espera. No caso desse projeto, foi identificado a necessidade de notificar os usuários subscritos em segundo plano, para que o usuário administrador que tenha cadastrado o ato publicado não fique esperando essa operação. 
 Para isso, foi implementado o padrão de Events e Listeners do Laravel. Ao cadastrar ou atualizar um novo ato jurídico (legal act), é disparado o evento LegalActPublished, que por sua vez ativa a escuta SendPublishedLegalActForTypeNotification .
