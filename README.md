@@ -370,7 +370,7 @@ cp .env.example .env
 ```
 E agora para instalar o Sail com MySQL, execute o comando:
 ```
-php artisan sail:install --with=mysql
+php artisan sail:install --with=mysql,redis,mailhog,minio
 ```
 E agora para rodar o Sail do Laravel, execute o comando
 ```
